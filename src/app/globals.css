@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-ibm-plex-sans), "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-canvas: var(--canvas);
+  --color-canvas-elevated: var(--canvas-elevated);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-muted: var(--accent-muted);
+  --color-focus-ring: var(--focus-ring);
+}
+
+:root {
+  --canvas: #f7f6f3;
+  --canvas-elevated: #ffffff;
+  --surface: #ffffff;
+  --surface-hover: #f0efe9;
+  --border: #e4e2db;
+  --border-strong: #cfcbc2;
+  --fg: #141414;
+  --fg-muted: #4a4a4a;
+  --fg-subtle: #6b6b6b;
+  --accent: #3d4f8f;
+  --accent-fg: #3d4f8f;
+  --accent-muted: #e8ebf5;
+  --focus-ring: #3d4f8f;
+}
+
+.dark {
+  --canvas: #0c0d10;
+  --canvas-elevated: #12141a;
+  --surface: #16181f;
+  --surface-hover: #1c1f28;
+  --border: #2a2e38;
+  --border-strong: #3a4050;
+  --fg: #ececec;
+  --fg-muted: #a8adb8;
+  --fg-subtle: #7a8090;
+  --accent: #7b8fd4;
+  --accent-fg: #9aabdf;
+  --accent-muted: #1a2035;
+  --focus-ring: #7b8fd4;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--accent-muted);
+    color: var(--fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer utilities {
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .fade-in {
+    animation: fade-in 0.5s ease-out both;
+  }
+
+  .fade-in-up {
+    animation: fade-in-up 0.55s ease-out both;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

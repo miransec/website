@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.gitignore
+*.md
+!docs/**
+.env
+.env*.local
+Dockerfile
+.dockerignore
+npm-debug.log*
+playwright-report
+test-results
+coverage
