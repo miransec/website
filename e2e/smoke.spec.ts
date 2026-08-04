@@ -3,13 +3,17 @@ import { expect, test } from "@playwright/test";
 const siteConfigEmail = "contact@muhammadmiran.com";
 
 test.describe("portfolio smoke", () => {
-  test("home page shows brand and selected work", async ({ page }) => {
+  test("home page shows brand and selected systems", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1, name: "Miran" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "01 / selected work" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "SELECTED SYSTEMS" })).toBeVisible();
     await expect(page.getByText("VaaniDesk").first()).toBeVisible();
     await expect(page.getByText("AtlasCore").first()).toBeVisible();
-    await expect(page.getByRole("link", { name: /View work/i })).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /View engineering case study/i }).first(),
+    ).toBeVisible();
+    await expect(page.getByText("206 tests")).toBeVisible();
+    await expect(page.getByText("AI systems → AI security")).toBeVisible();
   });
 
   test("primary navigation reaches core pages", async ({ page }) => {
@@ -32,12 +36,12 @@ test.describe("portfolio smoke", () => {
   test("case studies render verified project information", async ({ page }) => {
     await page.goto("/projects/vaanidesk");
     await expect(page.getByRole("heading", { name: "VaaniDesk" })).toBeVisible();
-    await expect(page.getByText(/206 passed/)).toBeVisible();
+    await expect(page.getByText(/206 passed/).first()).toBeVisible();
     await expect(page.getByRole("link", { name: /repository/i })).toHaveAttribute(
       "href",
       "https://github.com/miransec/vaanidesk",
     );
-    await expect(page.getByRole("img", { name: /homepage/i })).toBeVisible();
+    await expect(page.getByRole("img", { name: /homepage/i }).first()).toBeVisible();
     await expect(page.getByText(/repository coming soon/i)).toHaveCount(0);
     await expect(page.getByText(/MCP server/i)).toBeVisible();
 

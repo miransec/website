@@ -23,28 +23,28 @@
 }
 
 :root {
-  --canvas: #f4f3ef;
-  --canvas-elevated: #fafaf7;
-  --surface: #fafaf7;
-  --surface-hover: #eeede7;
-  --border: #ddd9d0;
-  --border-strong: #c4bfb4;
-  --fg: #161616;
+  --canvas: #f3f2ee;
+  --canvas-elevated: #fafaf8;
+  --surface: #fafaf8;
+  --surface-hover: #eeede8;
+  --border: #ddd9d1;
+  --border-strong: #c2bdb3;
+  --fg: #141414;
   --fg-muted: #4a4a4a;
   --fg-subtle: #737373;
   --accent: #3a4a7a;
   --accent-fg: #3a4a7a;
   --accent-muted: #e6e9f2;
   --focus-ring: #3a4a7a;
-  --guide: rgba(22, 22, 22, 0.045);
+  --guide: rgba(20, 20, 20, 0.028);
 }
 
 .dark {
-  --canvas: #111318;
-  --canvas-elevated: #161920;
-  --surface: #161920;
-  --surface-hover: #1c2028;
-  --border: #2a2f3a;
+  --canvas: #0e1117;
+  --canvas-elevated: #141820;
+  --surface: #141820;
+  --surface-hover: #191e28;
+  --border: #262b36;
   --border-strong: #3a4150;
   --fg: #e8e8e6;
   --fg-muted: #9aa0ab;
@@ -53,7 +53,7 @@
   --accent-fg: #8fa0d4;
   --accent-muted: #1a2030;
   --focus-ring: #7b8fc7;
-  --guide: rgba(232, 232, 230, 0.035);
+  --guide: rgba(232, 232, 230, 0.018);
 }
 
 @layer base {
@@ -80,7 +80,7 @@
     background-image:
       linear-gradient(var(--guide) 1px, transparent 1px),
       linear-gradient(90deg, var(--guide) 1px, transparent 1px);
-    background-size: 48px 48px;
+    background-size: 56px 56px;
     background-position: -1px -1px;
     color: var(--fg);
     font-family: var(--font-sans);
@@ -125,6 +125,19 @@
     }
   }
 
+  .container-wide {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 68rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-wide {
+      padding-inline: 1.75rem;
+    }
+  }
+
   .font-mono-ui {
     font-family: var(--font-mono);
     letter-spacing: 0.01em;
@@ -152,15 +165,15 @@
 
   .group:hover .link-arrow,
   .group:focus-within .link-arrow {
-    transform: translateX(3px);
+    transform: translateX(4px);
   }
 
   .fade-in {
-    animation: fade-in 0.35s ease-out both;
+    animation: fade-in 0.3s ease-out both;
   }
 
   .fade-in-up {
-    animation: fade-in-up 0.4s ease-out both;
+    animation: fade-in-up 0.35s ease-out both;
   }
 
   @keyframes fade-in {
@@ -175,7 +188,7 @@
   @keyframes fade-in-up {
     from {
       opacity: 0;
-      transform: translateY(4px);
+      transform: translateY(3px);
     }
     to {
       opacity: 1;

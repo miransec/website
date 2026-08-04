@@ -37,10 +37,14 @@ export default function AtlasCorePage() {
       </nav>
 
       <header className="mt-8 max-w-2xl">
-        <p className="font-mono-ui text-xs text-fg-subtle">
-          ~/projects/atlascore
+        <p className="font-mono-ui text-xs tracking-wide text-fg-subtle">
+          <span className="text-accent-fg">02</span>
+          <span className="mx-1.5 text-fg-subtle/60">/</span>
+          <span className="uppercase">AtlasCore</span>
+          <span className="mx-2 text-fg-subtle/50">·</span>
+          <span>{project.statusShort}</span>
         </p>
-        <h1 className="mt-3 text-3xl font-medium tracking-tight text-fg md:text-4xl">
+        <h1 className="mt-4 text-3xl font-medium tracking-tight text-fg md:text-4xl">
           {project.title}
         </h1>
         <p className="mt-2 text-[15px] text-fg-muted">{project.subtitle}</p>
@@ -48,12 +52,27 @@ export default function AtlasCorePage() {
           rows={[
             { label: "status", value: project.statusShort },
             { label: "role", value: "engineering" },
-            { label: "focus", value: "tenancy / identity / audit" },
+            { label: "focus", value: "RLS / identity / authorization / audit" },
           ]}
         />
         <p className="mt-6 text-[15px] leading-relaxed text-fg-muted">
           {project.description}
         </p>
+        <div className="mt-6 rounded-sm border border-border bg-surface p-5">
+          <p className="font-mono-ui text-[10px] tracking-wide text-fg-subtle">
+            ~/projects/atlascore
+          </p>
+          <div className="mt-4 space-y-2 font-mono-ui text-xs text-fg-muted">
+            {project.focus.map((term) => (
+              <p key={term}>
+                <span className="text-accent-fg">→</span> {term}
+              </p>
+            ))}
+          </div>
+          <p className="mt-5 font-mono-ui text-[10px] text-fg-subtle">
+            product visual pending · {project.statusShort}
+          </p>
+        </div>
         <p className="mt-4 font-mono-ui text-xs text-fg-subtle">
           AtlasCore — In active development
         </p>

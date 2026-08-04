@@ -8,11 +8,10 @@ export const siteConfig = {
   domain: "muhammadmiran.com",
   locale: "en_US",
   brandPath: "miran/",
-  tagline: "AI engineer building secure, intelligent systems.",
+  tagline: "AI engineer building secure intelligent systems.",
   summary:
-    "I build AI systems where models work inside reliable backend, retrieval and security boundaries.",
-  currently:
-    "Building secure AI systems and exploring the intersection of artificial intelligence and cybersecurity.",
+    "I build AI systems around reliable backend, retrieval and security boundaries.",
+  currently: "AI systems → AI security",
   aboutBlurb:
     "I like building systems where AI is useful because of the engineering around it — retrieval, permissions, APIs, evaluation and security.",
   statusLine: "> currently building production AI systems",

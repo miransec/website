@@ -49,7 +49,7 @@ export const projects: Project[] = [
     status: "engineering-complete",
     statusLabel: "v1.0.1 — Engineering complete / portfolio release preparation",
     statusShort: "v1.0.1",
-    focus: ["Controlled agents", "RAG", "security", "evaluation"],
+    focus: ["Agents", "RAG", "Security", "Evaluation"],
     techLine: ["FastAPI", "PostgreSQL", "RAG", "Next.js"],
     featured: true,
     technologies: [
@@ -99,7 +99,7 @@ export const projects: Project[] = [
     status: "in-development",
     statusLabel: "In active development",
     statusShort: "building",
-    focus: ["RLS", "RBAC", "identity", "audit"],
+    focus: ["RLS", "Identity", "Authorization", "Audit"],
     techLine: ["PostgreSQL RLS", "RBAC", "FastAPI", "Redis"],
     featured: true,
     technologies: [

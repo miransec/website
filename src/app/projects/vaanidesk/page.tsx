@@ -49,10 +49,14 @@ export default function VaaniDeskPage() {
       </nav>
 
       <header className="mt-8 max-w-2xl">
-        <p className="font-mono-ui text-xs text-fg-subtle">
-          ~/projects/vaanidesk
+        <p className="font-mono-ui text-xs tracking-wide text-fg-subtle">
+          <span className="text-accent-fg">01</span>
+          <span className="mx-1.5 text-fg-subtle/60">/</span>
+          <span className="uppercase">VaaniDesk</span>
+          <span className="mx-2 text-fg-subtle/50">·</span>
+          <span>{project.statusShort}</span>
         </p>
-        <h1 className="mt-3 text-3xl font-medium tracking-tight text-fg md:text-4xl">
+        <h1 className="mt-4 text-3xl font-medium tracking-tight text-fg md:text-4xl">
           {project.title}
         </h1>
         <p className="mt-2 text-[15px] text-fg-muted">{project.subtitle}</p>
@@ -61,14 +65,25 @@ export default function VaaniDeskPage() {
             { label: "status", value: project.statusShort },
             { label: "role", value: "engineering" },
             { label: "focus", value: "agents / RAG / security" },
+            {
+              label: "tests",
+              value: `${vaanideskMetrics.backendTests.passed} · ${vaanideskMetrics.evaluations.passed} evals · ${vaanideskMetrics.e2e.playwrightPassed} E2E`,
+            },
+            {
+              label: "security",
+              value: `${vaanideskMetrics.evaluations.securityCritical} critical evals · ${vaanideskMetrics.evaluations.securityFailures} failures`,
+            },
           ]}
         />
         <p className="mt-6 text-[15px] leading-relaxed text-fg-muted">
           {project.description}
         </p>
-        <p className="mt-4 font-mono-ui text-xs text-fg-subtle">
-          {vaanideskMetrics.label}
-        </p>
+        <CaseStudyFigure
+          src={shots.home}
+          alt="VaaniDesk product homepage"
+          caption="Product homepage — brand-first entry and demo path"
+          priority
+        />
         <div className="mt-6 flex flex-wrap gap-4 font-mono-ui text-xs text-fg-subtle">
           {project.links.github.href ? (
             <a
@@ -106,12 +121,6 @@ export default function VaaniDeskPage() {
             coverage, and security controls suitable for real operational
             workflows.
           </p>
-          <CaseStudyFigure
-            src={shots.home}
-            alt="VaaniDesk product homepage"
-            caption="Product homepage — brand-first entry and demo path"
-            priority
-          />
         </CaseStudySection>
 
         <CaseStudySection title="Problem">

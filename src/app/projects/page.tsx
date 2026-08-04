@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
-import { ProjectRow } from "@/components/ProjectRow";
-import { getFeaturedProjects, projects, vaanideskMetrics } from "@/data/projects";
+import { SystemCard } from "@/components/SystemCard";
+import {
+  getFeaturedProjects,
+  projects,
+  vaanideskMetrics,
+} from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -12,28 +16,45 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   const featured = getFeaturedProjects();
   const list = featured.length ? featured : projects;
-  const vaanideskLine = `${vaanideskMetrics.backendTests.passed} tests · ${vaanideskMetrics.evaluations.passed} evaluations · ${vaanideskMetrics.e2e.playwrightPassed} browser E2E tests`;
 
   return (
-    <div className="container-page py-14 md:py-20">
-      <p className="section-label">01 / work</p>
-      <h1 className="mt-6 text-2xl font-medium tracking-tight text-fg md:text-3xl">
+    <div className="container-wide py-12 md:py-16">
+      <p className="font-mono-ui text-xs tracking-[0.08em] text-fg-subtle">
+        SELECTED SYSTEMS
+      </p>
+      <h1 className="mt-4 text-2xl font-medium tracking-tight text-fg md:text-3xl">
         Work
       </h1>
-      <p className="mt-3 max-w-md text-[15px] text-fg-muted">
-        Systems work across agentic AI, retrieval, backend engineering, and
-        security.
-      </p>
-      <div className="mt-8">
-        {list.map((project) => (
-          <ProjectRow
-            key={project.slug}
-            project={project}
-            quietMetrics={
-              project.slug === "vaanidesk" ? vaanideskLine : undefined
-            }
-          />
-        ))}
+      <div className="mt-8 grid gap-4 md:grid-cols-2 md:gap-5">
+        {list.map((project, i) => {
+          const index = String(i + 1).padStart(2, "0");
+          if (project.slug === "vaanidesk") {
+            return (
+              <SystemCard
+                key={project.slug}
+                index={index}
+                project={project}
+                metrics={[
+                  `${vaanideskMetrics.backendTests.passed} tests`,
+                  `${vaanideskMetrics.evaluations.passed} evaluations`,
+                  `${vaanideskMetrics.e2e.playwrightPassed} browser E2E`,
+                ]}
+                image={{
+                  src: "/projects/vaanidesk/home.png",
+                  alt: "VaaniDesk product homepage",
+                }}
+              />
+            );
+          }
+          return (
+            <SystemCard
+              key={project.slug}
+              index={index}
+              project={project}
+              placeholderLabel="~/projects/atlascore"
+            />
+          );
+        })}
       </div>
     </div>
   );
