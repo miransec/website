@@ -32,8 +32,13 @@ test.describe("portfolio smoke", () => {
   test("case studies render verified project information", async ({ page }) => {
     await page.goto("/projects/vaanidesk");
     await expect(page.getByRole("heading", { name: "VaaniDesk" })).toBeVisible();
-    await expect(page.getByText(/197 passed/)).toBeVisible();
-    await expect(page.getByText(/repository coming soon/i)).toBeVisible();
+    await expect(page.getByText(/206 passed/)).toBeVisible();
+    await expect(page.getByRole("link", { name: /repository/i })).toHaveAttribute(
+      "href",
+      "https://github.com/miransec/vaanidesk",
+    );
+    await expect(page.getByRole("img", { name: /homepage/i })).toBeVisible();
+    await expect(page.getByText(/repository coming soon/i)).toHaveCount(0);
     await expect(page.getByText(/MCP server/i)).toBeVisible();
 
     await page.goto("/projects/atlascore");

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { VaaniDeskArchitecture } from "@/components/ArchitectureDiagram";
 import {
+  CaseStudyFigure,
   CaseStudyMeta,
   CaseStudySection,
   MetricGrid,
@@ -21,6 +22,15 @@ export const metadata: Metadata = {
     "VaaniDesk case study — multilingual AI customer support with controlled agent workflows, hybrid RAG, citations, evaluations, and security controls.",
   alternates: { canonical: "/projects/vaanidesk" },
 };
+
+const shots = {
+  home: "/projects/vaanidesk/home.png",
+  hinglish: "/projects/vaanidesk/hinglish-order.png",
+  rag: "/projects/vaanidesk/rag-citations.png",
+  confirmation: "/projects/vaanidesk/confirmation.png",
+  observability: "/projects/vaanidesk/observability.png",
+  evaluations: "/projects/vaanidesk/evaluations.png",
+} as const;
 
 export default function VaaniDeskPage() {
   const project = getProjectBySlug("vaanidesk");
@@ -96,6 +106,12 @@ export default function VaaniDeskPage() {
             coverage, and security controls suitable for real operational
             workflows.
           </p>
+          <CaseStudyFigure
+            src={shots.home}
+            alt="VaaniDesk product homepage"
+            caption="Product homepage — brand-first entry and demo path"
+            priority
+          />
         </CaseStudySection>
 
         <CaseStudySection title="Problem">
@@ -118,12 +134,17 @@ export default function VaaniDeskPage() {
           <VaaniDeskArchitecture />
         </CaseStudySection>
 
-        <CaseStudySection title="Multilingual system">
+        <CaseStudySection title="Multilingual customer support">
           <p>
             Language support covers English, Hindi, Hinglish, and Marathi, with
             routing and evaluation awareness for mixed-language customer
             interactions common in real support environments.
           </p>
+          <CaseStudyFigure
+            src={shots.hinglish}
+            alt="VaaniDesk Hinglish order status conversation"
+            caption="Hinglish order lookup — mixed-language intent with structured order status"
+          />
         </CaseStudySection>
 
         <CaseStudySection title="Controlled agent workflow">
@@ -132,6 +153,11 @@ export default function VaaniDeskPage() {
             controlled tool calling. Sensitive or destructive actions require
             confirmation rather than unconstrained autonomous execution.
           </p>
+          <CaseStudyFigure
+            src={shots.confirmation}
+            alt="VaaniDesk cancellation confirmation dialog"
+            caption="Cancellation confirmation — approve/deny gate before a sensitive action"
+          />
         </CaseStudySection>
 
         <CaseStudySection title="Business tools">
@@ -142,13 +168,18 @@ export default function VaaniDeskPage() {
           </p>
         </CaseStudySection>
 
-        <CaseStudySection title="Hybrid RAG">
+        <CaseStudySection title="Grounded retrieval / RAG">
           <p>
             Retrieval combines hybrid search over PostgreSQL with pgvector,
             returning source citations so answers remain inspectable. This
             keeps model outputs grounded in indexed business knowledge rather
             than unconstrained generation alone.
           </p>
+          <CaseStudyFigure
+            src={shots.rag}
+            alt="VaaniDesk refund policy answer with source citations"
+            caption="RAG answer with citations — policy response grounded in retrieved sources"
+          />
         </CaseStudySection>
 
         <CaseStudySection title="Security model">
@@ -169,12 +200,17 @@ export default function VaaniDeskPage() {
           </p>
         </CaseStudySection>
 
-        <CaseStudySection title="Evaluations">
+        <CaseStudySection title="Evaluation / verification">
           <p>
-            Evaluation is treated as a release gate. Verified v1.0.0 metrics
+            Evaluation is treated as a release gate. Verified v1.0.1 metrics
             include 113 deterministic evaluation cases passed, with 40
             security-critical evaluations and 0 security failures.
           </p>
+          <CaseStudyFigure
+            src={shots.evaluations}
+            alt="VaaniDesk evaluation run results"
+            caption="Evaluation harness — deterministic cases including security-critical coverage"
+          />
         </CaseStudySection>
 
         <CaseStudySection title="Observability">
@@ -183,6 +219,11 @@ export default function VaaniDeskPage() {
             runs, tool calls, and retrieval behavior can be inspected during
             development and verification.
           </p>
+          <CaseStudyFigure
+            src={shots.observability}
+            alt="VaaniDesk observability admin view"
+            caption="Observability — inspect agent runs, tools, and retrieval behavior"
+          />
         </CaseStudySection>
 
         <CaseStudySection title="Testing">

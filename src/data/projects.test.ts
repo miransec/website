@@ -39,12 +39,13 @@ describe("project data integrity", () => {
   });
 
   it("keeps verified VaaniDesk metrics coherent", () => {
+    expect(vaanideskMetrics.version).toBe("v1.0.1");
     expect(vaanideskMetrics.backendTests.failed).toBe(0);
     expect(vaanideskMetrics.evaluations.securityFailures).toBe(0);
-    expect(vaanideskMetrics.backendTests.passed).toBe(197);
+    expect(vaanideskMetrics.backendTests.passed).toBe(206);
     expect(vaanideskMetrics.evaluations.passed).toBe(113);
     expect(vaanideskMetrics.evaluations.securityCritical).toBe(40);
-    expect(vaanideskMetrics.e2e.playwrightPassed).toBe(9);
+    expect(vaanideskMetrics.e2e.playwrightPassed).toBe(14);
   });
 
   it("does not claim MCP or vision as VaaniDesk areas", () => {
@@ -54,12 +55,27 @@ describe("project data integrity", () => {
     expect(areas.some((a) => a === "multimodal support")).toBe(false);
   });
 
-  it("does not invent public GitHub or demo URLs", () => {
-    for (const project of projects) {
-      expect(project.links.github.href).toBeNull();
-      if (project.links.demo) {
-        expect(project.links.demo.href).toBeNull();
-      }
+  it("links VaaniDesk to the public miransec repository and keeps AtlasCore honest", () => {
+    const vaanidesk = getProjectBySlug("vaanidesk");
+    const atlascore = getProjectBySlug("atlascore");
+    expect(vaanidesk?.links.github.href).toBe(
+      "https://github.com/miransec/vaanidesk",
+    );
+    expect(atlascore?.links.github.href).toBeNull();
+    expect(vaanidesk?.links.demo?.href ?? null).toBeNull();
+  });
+
+  it("ships real VaaniDesk portfolio screenshots", () => {
+    const dir = path.join(process.cwd(), "public", "projects", "vaanidesk");
+    for (const name of [
+      "home.png",
+      "hinglish-order.png",
+      "rag-citations.png",
+      "confirmation.png",
+      "observability.png",
+      "evaluations.png",
+    ]) {
+      expect(existsSync(path.join(dir, name))).toBe(true);
     }
   });
 });

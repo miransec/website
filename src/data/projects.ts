@@ -47,8 +47,8 @@ export const projects: Project[] = [
     description:
       "A production-oriented multilingual AI support system combining controlled agent workflows, real business tools, hybrid retrieval, source citations, evaluation, and security controls.",
     status: "engineering-complete",
-    statusLabel: "v1.0.0 — Engineering complete / portfolio release preparation",
-    statusShort: "v1.0.0",
+    statusLabel: "v1.0.1 — Engineering complete / portfolio release preparation",
+    statusShort: "v1.0.1",
     focus: ["Controlled agents", "RAG", "security", "evaluation"],
     techLine: ["FastAPI", "PostgreSQL", "RAG", "Next.js"],
     featured: true,
@@ -65,9 +65,9 @@ export const projects: Project[] = [
       "Playwright",
     ],
     highlights: [
-      "197 backend tests passed · 0 failed",
+      "206 backend tests passed · 0 failed",
       "113 deterministic evaluations · 40 security-critical",
-      "9 Playwright E2E tests passed",
+      "14 Playwright E2E tests passed",
       "Hybrid RAG with source citations and confirmations",
     ],
     links: {
@@ -77,8 +77,8 @@ export const projects: Project[] = [
       },
       github: {
         label: "GitHub",
-        href: null,
-        comingSoon: true,
+        href: "https://github.com/miransec/vaanidesk",
+        external: true,
       },
       demo: {
         label: "Demo",
@@ -142,17 +142,17 @@ export function getFeaturedProjects(): Project[] {
 }
 
 export const vaanideskMetrics = {
-  version: "v1.0.0",
+  version: "v1.0.1",
   label:
-    "VaaniDesk v1.0.0 — Engineering complete / portfolio release preparation",
-  backendTests: { passed: 197, failed: 0, skipped: 0 },
+    "VaaniDesk v1.0.1 — Engineering complete / portfolio release preparation",
+  backendTests: { passed: 206, failed: 0, skipped: 0 },
   evaluations: {
     passed: 113,
     deterministic: true,
     securityCritical: 40,
     securityFailures: 0,
   },
-  e2e: { playwrightPassed: 9 },
+  e2e: { playwrightPassed: 14 },
   quality: {
     mypyCleanSourceFiles: 100,
     dockerHealthVerified: true,
@@ -183,7 +183,7 @@ export const vaanideskAreas = [
 export const vaanideskLimitations = [
   "Real external LLM, STT/TTS, SMTP and WhatsApp integrations are optional and credential-dependent; deterministic providers/simulators are used for local and CI verification.",
   "Credential-dependent integrations are not presented as live in every deployment environment.",
-  "An MCP server and a dedicated vision / image-analysis pipeline are not part of the shipped v1.0.0 surface.",
+  "An MCP server and a dedicated vision / image-analysis pipeline are not part of the shipped v1.0.1 surface.",
 ] as const;
 
 export const atlascoreCurrentAreas = [

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type SectionProps = {
   id?: string;
   title: string;
@@ -68,5 +70,44 @@ export function CaseStudyMeta({
         </div>
       ))}
     </dl>
+  );
+}
+
+type FigureProps = {
+  src: string;
+  alt: string;
+  caption: string;
+  priority?: boolean;
+};
+
+export function CaseStudyFigure({
+  src,
+  alt,
+  caption,
+  priority = false,
+}: FigureProps) {
+  return (
+    <figure className="mt-5">
+      <a
+        href={src}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block overflow-hidden rounded-sm border border-border bg-canvas-elevated transition-colors duration-200 hover:border-border-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+      >
+        <Image
+          src={src}
+          alt={alt}
+          width={1440}
+          height={1000}
+          sizes="(max-width: 768px) 100vw, 42rem"
+          quality={90}
+          priority={priority}
+          className="h-auto w-full"
+        />
+      </a>
+      <figcaption className="mt-2 font-mono-ui text-[11px] leading-relaxed text-fg-subtle">
+        {caption}
+      </figcaption>
+    </figure>
   );
 }

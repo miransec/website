@@ -63,7 +63,7 @@ export function VaaniDeskArchitecture() {
         External LLM, STT/TTS, SMTP, and WhatsApp providers are optional and
         credential-dependent. Local and CI paths use deterministic
         providers/simulators. MCP and dedicated vision pipelines are not part of
-        the shipped v1.0.0 surface.
+        the shipped v1.0.1 surface.
       </p>
     </div>
   );
