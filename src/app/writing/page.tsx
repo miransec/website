@@ -31,7 +31,7 @@ export default function WritingPage() {
               className="flex items-center justify-between gap-4 px-4 py-4"
             >
               <span className="text-sm text-fg-muted">{title}</span>
-              <span className="shrink-0 text-xs text-fg-subtle">Soon</span>
+              <span className="shrink-0 text-xs text-fg-subtle">Planned</span>
             </li>
           ))}
         </ul>

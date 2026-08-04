@@ -11,7 +11,8 @@ export const siteConfig = {
   tagline: "AI Engineer building secure, production-oriented AI systems.",
   summary:
     "I build AI systems that combine model intelligence with reliable backend engineering, retrieval, security, evaluation, and production infrastructure.",
-  statusLine: "Currently building VaaniDesk and AtlasCore.",
+  statusLine:
+    "VaaniDesk v1.0.0 — portfolio release preparation · currently building AtlasCore.",
   github: {
     label: "GitHub",
     href: "https://github.com/Mod-With-Miran",
@@ -23,8 +24,8 @@ export const siteConfig = {
   },
   email: {
     label: "Email",
-    href: null as string | null,
-    placeholder: true,
+    address: "contact@muhammadmiran.com",
+    href: "mailto:contact@muhammadmiran.com",
   },
   resume: {
     path: "/resume.pdf",

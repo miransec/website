@@ -78,14 +78,7 @@ export function Header() {
             >
               LinkedIn
             </a>
-          ) : (
-            <span
-              className="hidden rounded-md px-3 py-2 text-sm text-fg-subtle sm:inline-flex"
-              title="LinkedIn URL coming soon"
-            >
-              LinkedIn
-            </span>
-          )}
+          ) : null}
           <ThemeToggle />
           <button
             type="button"

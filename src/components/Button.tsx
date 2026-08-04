@@ -50,13 +50,16 @@ export function Button({
   const classes = cx(variant, size, className);
 
   if (href) {
-    if (external) {
+    const isMailOrTel =
+      href.startsWith("mailto:") || href.startsWith("tel:");
+    if (external || isMailOrTel) {
       return (
         <a
           href={href}
           className={classes}
-          target="_blank"
-          rel="noopener noreferrer"
+          {...(external && !isMailOrTel
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
           aria-label={rest["aria-label"]}
         >
           {children}

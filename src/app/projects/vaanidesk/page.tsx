@@ -17,7 +17,7 @@ import {
 export const metadata: Metadata = {
   title: "VaaniDesk",
   description:
-    "VaaniDesk case study — multilingual AI customer support platform with controlled agent workflows, hybrid RAG, evaluations, and security controls.",
+    "VaaniDesk case study — multilingual AI customer support with controlled agent workflows, hybrid RAG, citations, evaluations, and security controls.",
   alternates: { canonical: "/projects/vaanidesk" },
 };
 
@@ -26,7 +26,7 @@ export default function VaaniDeskPage() {
   if (!project) notFound();
 
   return (
-    <article className="container-page py-16 md:py-20">
+    <article className="container-page py-14 md:py-20">
       <nav className="text-sm text-fg-subtle" aria-label="Breadcrumb">
         <Link href="/projects" className="hover:text-fg">
           Projects
@@ -37,7 +37,7 @@ export default function VaaniDeskPage() {
         <span className="text-fg-muted">VaaniDesk</span>
       </nav>
 
-      <header className="mt-6 max-w-3xl">
+      <header className="mt-6 max-w-2xl">
         <p className="text-sm font-medium text-accent-fg">{project.subtitle}</p>
         <h1 className="mt-2 text-3xl font-medium tracking-tight text-fg md:text-5xl">
           {project.title}
@@ -63,20 +63,31 @@ export default function VaaniDeskPage() {
               Repository coming soon
             </span>
           )}
-          <span className="inline-flex items-center rounded-md border border-border px-4 py-2.5 text-sm text-fg-subtle">
-            Demo coming soon
-          </span>
+          {project.links.demo?.href ? (
+            <a
+              href={project.links.demo.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-md border border-border-strong px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:bg-surface-hover"
+            >
+              Demo
+            </a>
+          ) : (
+            <span className="inline-flex items-center rounded-md border border-border px-4 py-2.5 text-sm text-fg-subtle">
+              Demo coming soon
+            </span>
+          )}
         </div>
       </header>
 
-      <div className="mt-14 space-y-14 max-w-3xl">
+      <div className="mt-14 max-w-2xl space-y-14 md:mt-16 md:space-y-16">
         <CaseStudySection title="Overview">
           <p>
             VaaniDesk is a production-oriented multilingual AI customer support
             platform. It combines model intelligence with controlled tool
-            execution, hybrid retrieval with source citations, multimodal
-            pipelines, evaluation coverage, and security controls suitable for
-            real operational workflows.
+            execution, hybrid retrieval with source citations, evaluation
+            coverage, and security controls suitable for real operational
+            workflows.
           </p>
         </CaseStudySection>
 
@@ -136,25 +147,26 @@ export default function VaaniDeskPage() {
         <CaseStudySection title="Security model">
           <p>
             Security controls include authorization checks, idempotency for
-            side-effecting operations, and prompt-injection defenses. Security-
-            critical evaluation cases are part of the verified release metrics.
+            side-effecting operations, and prompt-injection defenses.
+            Security-critical evaluation cases are part of the verified release
+            metrics.
           </p>
         </CaseStudySection>
 
-        <CaseStudySection title="Multimodal pipelines">
+        <CaseStudySection title="Speech pipelines (optional)">
           <p>
-            Multimodal support covers speech-related pipelines (STT/TTS) in
-            addition to text. Real external STT/TTS providers are optional and
-            credential-dependent; deterministic providers/simulators are used
-            for local and CI verification.
+            Optional STT/TTS paths exist for speech-related support flows. Real
+            external STT/TTS providers are credential-dependent; deterministic
+            providers/simulators are used for local and CI verification. This
+            is not a dedicated vision or image-analysis pipeline.
           </p>
         </CaseStudySection>
 
         <CaseStudySection title="Evaluations">
           <p>
             Evaluation is treated as a release gate. Verified v1.0.0 metrics
-            include 113 evaluation cases passed, with 40 security-critical
-            evaluations and 0 security failures.
+            include 113 deterministic evaluation cases passed, with 40
+            security-critical evaluations and 0 security failures.
           </p>
         </CaseStudySection>
 
@@ -169,9 +181,9 @@ export default function VaaniDeskPage() {
         <CaseStudySection title="Testing">
           <p>
             The verification suite spans backend unit/integration tests,
-            evaluation cases, Playwright end-to-end coverage, static typing
-            with mypy, Docker health checks, migration cycles, seed
-            idempotency, and secret scanning.
+            deterministic evaluation cases, Playwright end-to-end coverage,
+            static typing with mypy, Docker health checks, migration cycles,
+            seed idempotency, and secret scanning.
           </p>
         </CaseStudySection>
 
@@ -183,7 +195,7 @@ export default function VaaniDeskPage() {
                 value: `${vaanideskMetrics.backendTests.passed} passed · ${vaanideskMetrics.backendTests.failed} failed · ${vaanideskMetrics.backendTests.skipped} skipped`,
               },
               {
-                label: "Evaluations",
+                label: "Deterministic evaluations",
                 value: `${vaanideskMetrics.evaluations.passed} passed`,
               },
               {

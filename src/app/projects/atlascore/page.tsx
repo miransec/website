@@ -7,7 +7,8 @@ import {
   TagList,
 } from "@/components/CaseStudy";
 import {
-  atlascoreAreas,
+  atlascoreCurrentAreas,
+  atlascoreRoadmap,
   getProjectBySlug,
 } from "@/data/projects";
 
@@ -23,7 +24,7 @@ export default function AtlasCorePage() {
   if (!project) notFound();
 
   return (
-    <article className="container-page py-16 md:py-20">
+    <article className="container-page py-14 md:py-20">
       <nav className="text-sm text-fg-subtle" aria-label="Breadcrumb">
         <Link href="/projects" className="hover:text-fg">
           Projects
@@ -34,7 +35,7 @@ export default function AtlasCorePage() {
         <span className="text-fg-muted">AtlasCore</span>
       </nav>
 
-      <header className="mt-6 max-w-3xl">
+      <header className="mt-6 max-w-2xl">
         <p className="text-sm font-medium text-accent-fg">{project.subtitle}</p>
         <h1 className="mt-2 text-3xl font-medium tracking-tight text-fg md:text-5xl">
           {project.title}
@@ -46,13 +47,24 @@ export default function AtlasCorePage() {
           AtlasCore — In active development
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <span className="inline-flex items-center rounded-md border border-border px-4 py-2.5 text-sm text-fg-subtle">
-            Repository coming soon
-          </span>
+          {project.links.github.href ? (
+            <a
+              href={project.links.github.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-md border border-border-strong px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:bg-surface-hover"
+            >
+              Repository
+            </a>
+          ) : (
+            <span className="inline-flex items-center rounded-md border border-border px-4 py-2.5 text-sm text-fg-subtle">
+              Repository coming soon
+            </span>
+          )}
         </div>
       </header>
 
-      <div className="mt-14 max-w-3xl space-y-14">
+      <div className="mt-14 max-w-2xl space-y-14 md:mt-16 md:space-y-16">
         <CaseStudySection title="Overview">
           <p>
             AtlasCore is a multi-tenant enterprise AI platform designed for
@@ -77,8 +89,8 @@ export default function AtlasCorePage() {
           <p>
             Phase 1 centers on application services, tenant isolation via
             PostgreSQL RLS, authentication hardening, and audit event
-            pipelines. Administrative identity and future RAG/workflow/MCP
-            capabilities sit on this foundation.
+            pipelines. Later intelligence capabilities are intentionally
+            deferred until this foundation is solid.
           </p>
           <AtlasCoreArchitecture />
         </CaseStudySection>
@@ -139,16 +151,26 @@ export default function AtlasCorePage() {
             and audit logging. Human-controlled architecture remains a design
             constraint for automation that can affect organisational state.
           </p>
-          <TagList items={atlascoreAreas} />
+          <TagList items={atlascoreCurrentAreas} />
+        </CaseStudySection>
+
+        <CaseStudySection title="Roadmap (not completed)">
+          <p>
+            The following capabilities are planned after Phase 1 foundations.
+            They are not claimed as finished functionality:
+          </p>
+          <TagList items={atlascoreRoadmap} />
         </CaseStudySection>
 
         <CaseStudySection title="Development status">
           <p>
-            <strong className="font-medium text-fg">Status: In development.</strong>{" "}
-            AtlasCore is under active engineering. Unfinished later phases are
-            not presented as completed. Some Phase 1A runtime verification
-            remains environment-dependent and is validated in the project&apos;s
-            own development and CI contexts rather than claimed as a universal
+            <strong className="font-medium text-fg">
+              Status: In active development.
+            </strong>{" "}
+            Phase 1A and Phase 1B engineering cover tenancy and security
+            foundations. Some Phase 1A runtime verification remains
+            environment-dependent and is validated in the project&apos;s own
+            development and CI contexts rather than claimed as a universal
             production deployment state.
           </p>
         </CaseStudySection>

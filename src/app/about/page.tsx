@@ -18,6 +18,12 @@ export default function AboutPage() {
         <div className="flex flex-col items-start gap-4">
           <ProfileAvatar size={112} />
           <ResumeCta />
+          <a
+            href={siteConfig.email.href}
+            className="text-sm text-accent-fg hover:underline"
+          >
+            {siteConfig.email.address}
+          </a>
         </div>
 
         <div className="max-w-2xl">

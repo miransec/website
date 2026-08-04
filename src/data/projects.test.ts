@@ -6,16 +6,16 @@ import {
   getProjectBySlug,
   projects,
   skillCategories,
+  vaanideskAreas,
   vaanideskMetrics,
 } from "@/data/projects";
 import { navLinks, siteConfig } from "@/data/site";
 
 describe("project data integrity", () => {
-  it("includes VaaniDesk and AtlasCore as featured projects", () => {
-    const featured = getFeaturedProjects();
-    expect(featured.map((p) => p.slug).sort()).toEqual([
-      "atlascore",
+  it("features VaaniDesk before AtlasCore", () => {
+    expect(getFeaturedProjects().map((p) => p.slug)).toEqual([
       "vaanidesk",
+      "atlascore",
     ]);
   });
 
@@ -42,6 +42,15 @@ describe("project data integrity", () => {
     expect(vaanideskMetrics.evaluations.securityFailures).toBe(0);
     expect(vaanideskMetrics.backendTests.passed).toBe(197);
     expect(vaanideskMetrics.evaluations.passed).toBe(113);
+    expect(vaanideskMetrics.evaluations.securityCritical).toBe(40);
+    expect(vaanideskMetrics.e2e.playwrightPassed).toBe(9);
+  });
+
+  it("does not claim MCP or vision as VaaniDesk areas", () => {
+    const areas = vaanideskAreas.map((a) => a.toLowerCase());
+    expect(areas.some((a) => a.includes("mcp"))).toBe(false);
+    expect(areas.some((a) => a.includes("vision"))).toBe(false);
+    expect(areas.some((a) => a === "multimodal support")).toBe(false);
   });
 
   it("does not invent public GitHub or demo URLs", () => {
@@ -68,9 +77,13 @@ describe("navigation and critical links", () => {
     expect(siteConfig.github.href).toBe("https://github.com/Mod-With-Miran");
   });
 
-  it("keeps LinkedIn and email as explicit placeholders", () => {
+  it("uses the verified professional email", () => {
+    expect(siteConfig.email.address).toBe("contact@muhammadmiran.com");
+    expect(siteConfig.email.href).toBe("mailto:contact@muhammadmiran.com");
+  });
+
+  it("keeps LinkedIn as an explicit placeholder", () => {
     expect(siteConfig.linkedin.href).toBeNull();
-    expect(siteConfig.email.href).toBeNull();
   });
 });
 
@@ -78,7 +91,6 @@ describe("optional assets", () => {
   it("does not require profile or résumé files to exist", () => {
     const profile = path.join(process.cwd(), "public", "profile.jpg");
     const resume = path.join(process.cwd(), "public", "resume.pdf");
-    // Presence is optional; siteConfig.resume.available must stay false until published.
     expect(siteConfig.resume.available).toBe(false);
     if (!existsSync(profile)) {
       expect(existsSync(profile)).toBe(false);

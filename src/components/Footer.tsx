@@ -21,6 +21,9 @@ export function Footer() {
           >
             GitHub
           </a>
+          <a href={siteConfig.email.href} className="hover:text-fg">
+            Email
+          </a>
           {siteConfig.linkedin.href ? (
             <a
               href={siteConfig.linkedin.href}
@@ -30,11 +33,7 @@ export function Footer() {
             >
               LinkedIn
             </a>
-          ) : (
-            <span className="text-fg-subtle" title="Coming soon">
-              LinkedIn
-            </span>
-          )}
+          ) : null}
           <Link href="/contact" className="hover:text-fg">
             Contact
           </Link>

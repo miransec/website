@@ -17,20 +17,20 @@ export default function HomePage() {
               "radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-muted), transparent), linear-gradient(to bottom, transparent, var(--canvas))",
           }}
         />
-        <div className="container-page relative py-20 md:py-28 lg:py-32">
+        <div className="container-page relative py-16 md:py-24 lg:py-28">
           <p className="fade-in text-sm font-medium tracking-wide text-accent-fg">
             {siteConfig.positioning}
           </p>
-          <h1 className="fade-in-up mt-5 text-5xl font-medium tracking-tight text-fg md:text-6xl lg:text-7xl">
+          <h1 className="fade-in-up mt-4 text-4xl font-medium tracking-tight text-fg sm:text-5xl md:mt-5 md:text-6xl lg:text-7xl">
             {siteConfig.name}
           </h1>
-          <p className="fade-in-up mt-5 max-w-2xl text-xl text-fg md:text-2xl text-balance">
+          <p className="fade-in-up mt-4 max-w-2xl text-lg text-fg text-balance sm:text-xl md:mt-5 md:text-2xl">
             {siteConfig.tagline}
           </p>
-          <p className="fade-in-up mt-5 max-w-2xl text-base leading-relaxed text-fg-muted md:text-lg">
+          <p className="fade-in-up mt-4 max-w-xl text-base leading-relaxed text-fg-muted md:mt-5 md:text-lg">
             {siteConfig.summary}
           </p>
-          <div className="fade-in-up mt-8 flex flex-wrap gap-3">
+          <div className="fade-in-up mt-7 flex flex-wrap gap-3 md:mt-8">
             <Button href="/projects">View Projects</Button>
             <Button href={siteConfig.github.href} variant="secondary" external>
               GitHub
@@ -39,7 +39,7 @@ export default function HomePage() {
               Contact
             </Button>
           </div>
-          <p className="fade-in-up mt-8 text-sm text-fg-subtle">
+          <p className="fade-in-up mt-7 text-sm text-fg-subtle md:mt-8">
             <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle" />
             {siteConfig.statusLine}
           </p>

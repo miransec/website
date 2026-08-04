@@ -29,6 +29,8 @@ export type Project = {
   screenshotDir: string;
 };
 
+const FEATURED_ORDER = ["vaanidesk", "atlascore"] as const;
+
 export const projects: Project[] = [
   {
     slug: "vaanidesk",
@@ -37,9 +39,9 @@ export const projects: Project[] = [
     shortDescription:
       "Production-oriented multilingual AI support with controlled agent workflows, hybrid retrieval, evaluations, and security controls.",
     description:
-      "A production-oriented multilingual AI support system combining controlled agent workflows, real business tools, hybrid retrieval, source citations, multimodal pipelines, evaluation and security controls.",
+      "A production-oriented multilingual AI support system combining controlled agent workflows, real business tools, hybrid retrieval, source citations, evaluation, and security controls.",
     status: "engineering-complete",
-    statusLabel: "v1.0.0 — Engineering complete",
+    statusLabel: "v1.0.0 — Engineering complete / portfolio release preparation",
     featured: true,
     technologies: [
       "Python",
@@ -55,9 +57,9 @@ export const projects: Project[] = [
     ],
     highlights: [
       "197 backend tests passed · 0 failed",
-      "113 evaluation cases · 40 security-critical · 0 failures",
-      "Strict mypy clean across 100 source files",
-      "Docker health, migrations, and secret scan verified",
+      "113 deterministic evaluations · 40 security-critical",
+      "9 Playwright E2E tests passed",
+      "Hybrid RAG with source citations and confirmations",
     ],
     links: {
       caseStudy: {
@@ -82,11 +84,11 @@ export const projects: Project[] = [
     title: "AtlasCore",
     subtitle: "Secure Enterprise AI Operations Platform",
     shortDescription:
-      "Multi-tenant enterprise AI platform for secure knowledge access, controlled automation, isolation, and auditable workflows.",
+      "Multi-tenant enterprise AI platform focused on secure tenancy, authentication, RBAC, and auditable operations — in active development.",
     description:
-      "A multi-tenant enterprise AI platform designed for secure knowledge access, controlled automation, organizational isolation and auditable AI workflows.",
+      "A multi-tenant enterprise AI platform designed for secure knowledge access, controlled automation, organizational isolation and auditable AI workflows. Phase 1 engineering prioritizes tenancy and security foundations.",
     status: "in-development",
-    statusLabel: "In development",
+    statusLabel: "In active development",
     featured: true,
     technologies: [
       "Python",
@@ -122,14 +124,22 @@ export function getProjectBySlug(slug: string): Project | undefined {
 }
 
 export function getFeaturedProjects(): Project[] {
-  return projects.filter((p) => p.featured);
+  return FEATURED_ORDER.map((slug) => getProjectBySlug(slug)).filter(
+    (p): p is Project => Boolean(p?.featured),
+  );
 }
 
 export const vaanideskMetrics = {
   version: "v1.0.0",
-  label: "VaaniDesk v1.0.0 — Engineering complete / portfolio release preparation",
+  label:
+    "VaaniDesk v1.0.0 — Engineering complete / portfolio release preparation",
   backendTests: { passed: 197, failed: 0, skipped: 0 },
-  evaluations: { passed: 113, securityCritical: 40, securityFailures: 0 },
+  evaluations: {
+    passed: 113,
+    deterministic: true,
+    securityCritical: 40,
+    securityFailures: 0,
+  },
   e2e: { playwrightPassed: 9 },
   quality: {
     mypyCleanSourceFiles: 100,
@@ -151,21 +161,20 @@ export const vaanideskAreas = [
   "hybrid RAG",
   "pgvector",
   "source citations",
-  "multimodal support",
-  "MCP",
-  "observability",
-  "evaluations",
   "authorization",
+  "evaluations",
+  "observability",
   "idempotency",
   "prompt-injection defenses",
 ] as const;
 
 export const vaanideskLimitations = [
   "Real external LLM, STT/TTS, SMTP and WhatsApp integrations are optional and credential-dependent; deterministic providers/simulators are used for local and CI verification.",
-  "Do not assume credential-dependent integrations are live in every deployment environment.",
+  "Credential-dependent integrations are not presented as live in every deployment environment.",
+  "An MCP server and a dedicated vision / image-analysis pipeline are not part of the shipped v1.0.0 surface.",
 ] as const;
 
-export const atlascoreAreas = [
+export const atlascoreCurrentAreas = [
   "PostgreSQL Row-Level Security",
   "FORCE RLS",
   "multi-tenancy",
@@ -177,7 +186,14 @@ export const atlascoreAreas = [
   "CSRF protection",
   "audit events",
   "human-controlled architecture",
-  "future RAG/workflow/MCP capabilities",
+] as const;
+
+/** Explicitly labelled future work — not completed functionality. */
+export const atlascoreRoadmap = [
+  "RAG",
+  "agent workflows",
+  "MCP",
+  "enterprise analytics",
 ] as const;
 
 export const skillCategories = [

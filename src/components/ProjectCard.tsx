@@ -7,9 +7,9 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="group flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-colors hover:border-border-strong hover:bg-surface-hover">
-      <div className="flex items-start justify-between gap-3">
-        <div>
+    <article className="group flex h-full flex-col rounded-lg border border-border bg-surface p-5 transition-colors hover:border-border-strong hover:bg-surface-hover sm:p-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
           <h3 className="text-lg font-medium tracking-tight text-fg">
             <Link
               href={project.links.caseStudy.href ?? `/projects/${project.slug}`}
@@ -20,7 +20,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </h3>
           <p className="mt-1 text-sm text-fg-muted">{project.subtitle}</p>
         </div>
-        <span className="shrink-0 rounded-md border border-border bg-canvas px-2 py-1 text-xs text-fg-subtle">
+        <span className="w-fit max-w-full rounded-md border border-border bg-canvas px-2 py-1 text-xs leading-snug text-fg-subtle">
           {project.statusLabel}
         </span>
       </div>

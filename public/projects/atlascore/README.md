@@ -1,12 +1,12 @@
 # Project screenshots
 
-Place real AtlasCore screenshots in this directory when available.
+AtlasCore screenshots are pending while the platform remains in active development.
 
-Suggested naming:
+When ready, place real screenshots here. Suggested naming:
 
 - `overview.png`
 - `tenancy.png`
 - `audit.png`
 
 Do not commit fabricated UI mockups presented as product screenshots.
-The case-study pages are designed to look complete without images.
+Case-study pages intentionally omit image blocks until real assets exist.

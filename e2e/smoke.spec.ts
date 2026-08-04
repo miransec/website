@@ -30,13 +30,22 @@ test.describe("portfolio smoke", () => {
     await expect(page.getByRole("heading", { name: "VaaniDesk" })).toBeVisible();
     await expect(page.getByText(/197 passed/)).toBeVisible();
     await expect(page.getByText(/Repository coming soon/)).toBeVisible();
+    await expect(page.getByText(/MCP server/i)).toBeVisible();
 
     await page.goto("/projects/atlascore");
     await expect(page.getByRole("heading", { name: "AtlasCore" })).toBeVisible();
     await expect(page.getByText("AtlasCore — In active development")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Roadmap (not completed)" })).toBeVisible();
   });
 
-  test("GitHub link is present and résumé placeholder is safe", async ({ page }) => {
+  test("contact email and safe placeholders", async ({ page }) => {
+    await page.goto("/contact");
+    await expect(
+      page.locator('a[href="mailto:contact@muhammadmiran.com"]').first(),
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "Email me" }).first()).toBeVisible();
+    await expect(page.getByText(/preferred contact method/i)).toBeVisible();
+
     await page.goto("/");
     await expect(
       page.locator('a[href="https://github.com/Mod-With-Miran"]').first(),

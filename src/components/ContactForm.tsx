@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { siteConfig } from "@/data/site";
 import { Button } from "./Button";
 
-const FORM_ENABLED = Boolean(process.env.NEXT_PUBLIC_CONTACT_FORM_ENABLED);
+const FORM_ENABLED =
+  process.env.NEXT_PUBLIC_CONTACT_FORM_ENABLED === "true";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -17,40 +19,25 @@ export function ContactForm() {
   if (!FORM_ENABLED) {
     return (
       <div className="rounded-lg border border-border bg-surface p-6">
-        <h2 className="text-lg font-medium text-fg">Contact form</h2>
+        <h2 className="text-lg font-medium text-fg">Preferred contact</h2>
         <p className="mt-2 text-sm leading-relaxed text-fg-muted">
-          The contact form is ready for wiring but currently disabled. Delivery
-          will be connected through a server route and SMTP (or equivalent)
-          once the professional email address and credentials are configured.
+          Direct email is currently the preferred contact method. A web form
+          will be enabled once SMTP (or equivalent) delivery is configured —
+          submissions are not accepted through this page yet.
         </p>
-        <p className="mt-4 text-sm text-fg-subtle">
-          Until then, use GitHub to reach out. Form fields below are visible for
-          layout review and remain non-submittable.
-        </p>
-        <fieldset disabled className="mt-6 space-y-4 opacity-70">
-          <legend className="sr-only">Disabled contact form</legend>
-          <Field label="Name" name="name" type="text" />
-          <Field label="Email" name="email" type="email" />
-          <Field label="Subject" name="subject" type="text" />
-          <div>
-            <label
-              htmlFor="message"
-              className="mb-1.5 block text-sm text-fg-muted"
-            >
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={5}
-              className="w-full rounded-md border border-border bg-canvas px-3 py-2 text-sm text-fg"
-              placeholder="Your message"
-            />
-          </div>
-          <Button type="button" disabled>
-            Send message (unavailable)
+        <div className="mt-5">
+          <Button href={siteConfig.email.href} external>
+            Email me
           </Button>
-        </fieldset>
+        </div>
+        <p className="mt-4 text-sm text-fg-subtle">
+          <a
+            href={siteConfig.email.href}
+            className="text-accent-fg underline-offset-2 hover:underline"
+          >
+            {siteConfig.email.address}
+          </a>
+        </p>
       </div>
     );
   }
@@ -59,6 +46,7 @@ export function ContactForm() {
     <form
       onSubmit={onSubmit}
       className="space-y-4 rounded-lg border border-border bg-surface p-6"
+      noValidate={false}
     >
       <h2 className="text-lg font-medium text-fg">Contact form</h2>
       {submitted ? (
@@ -70,7 +58,10 @@ export function ContactForm() {
       <Field label="Email" name="email" type="email" required />
       <Field label="Subject" name="subject" type="text" required />
       <div>
-        <label htmlFor="message-enabled" className="mb-1.5 block text-sm text-fg-muted">
+        <label
+          htmlFor="message-enabled"
+          className="mb-1.5 block text-sm text-fg-muted"
+        >
           Message
         </label>
         <textarea

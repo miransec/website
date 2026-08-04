@@ -6,15 +6,15 @@ export function VaaniDeskArchitecture() {
     },
     {
       title: "API & orchestration",
-      items: ["FastAPI", "Controlled agent runtime", "Tool gateway", "MCP adapters"],
+      items: ["FastAPI", "Controlled agent runtime", "Tool gateway"],
     },
     {
       title: "Intelligence layer",
       items: [
         "Multilingual LLM routing",
         "Hybrid RAG + citations",
-        "Multimodal STT/TTS pipelines",
         "Evaluation harness",
+        "Optional STT/TTS (credential-dependent)",
       ],
     },
     {
@@ -59,10 +59,11 @@ export function VaaniDeskArchitecture() {
           </div>
         ))}
       </div>
-      <p className="mt-4 text-xs text-fg-subtle">
+      <p className="mt-4 text-xs leading-relaxed text-fg-subtle">
         External LLM, STT/TTS, SMTP, and WhatsApp providers are optional and
         credential-dependent. Local and CI paths use deterministic
-        providers/simulators.
+        providers/simulators. MCP and dedicated vision pipelines are not part of
+        the shipped v1.0.0 surface.
       </p>
     </div>
   );
@@ -133,9 +134,10 @@ export function AtlasCoreArchitecture() {
           </div>
         ))}
       </div>
-      <p className="mt-4 text-xs text-fg-subtle">
-        Future RAG, workflow, and MCP capabilities are planned. They are not
-        presented as completed Phase 2+ deliverables.
+      <p className="mt-4 text-xs leading-relaxed text-fg-subtle">
+        Roadmap (not completed): RAG, agent workflows, MCP, and enterprise
+        analytics may follow once the security and tenancy foundations are
+        stable.
       </p>
     </div>
   );
