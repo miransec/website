@@ -23,21 +23,23 @@ export function SystemCard({
   return (
     <Link
       href={href}
-      className="group flex h-full flex-col overflow-hidden rounded-sm border border-border bg-surface transition-[border-color,background-color] duration-200 hover:border-border-strong hover:bg-surface-hover"
+      className="group flex h-full flex-col overflow-hidden rounded-[2px] border border-border bg-surface transition-[border-color,background-color] duration-200 hover:border-border-strong hover:bg-surface-hover"
     >
       <div className="flex flex-1 flex-col p-5 md:p-6">
         <div className="flex items-baseline justify-between gap-3">
           <p className="font-mono-ui text-[11px] tracking-wide text-fg-subtle">
             <span className="text-accent-fg">{index}</span>
             <span className="mx-1.5 text-fg-subtle/60">/</span>
-            <span className="uppercase text-fg">{project.title}</span>
+            <span className="uppercase tracking-[0.04em] text-fg">
+              {project.title}
+            </span>
           </p>
           <span className="font-mono-ui shrink-0 text-[11px] text-fg-subtle">
             {project.statusShort}
           </span>
         </div>
 
-        <h3 className="mt-5 text-lg font-medium tracking-tight text-fg transition-colors duration-200 group-hover:text-accent-fg md:text-xl">
+        <h3 className="mt-5 font-display text-xl font-semibold leading-snug tracking-[-0.02em] text-fg transition-colors duration-200 group-hover:text-accent-fg md:text-[1.35rem]">
           {project.subtitle}
         </h3>
 

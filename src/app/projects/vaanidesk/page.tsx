@@ -56,7 +56,7 @@ export default function VaaniDeskPage() {
           <span className="mx-2 text-fg-subtle/50">·</span>
           <span>{project.statusShort}</span>
         </p>
-        <h1 className="mt-4 text-3xl font-medium tracking-tight text-fg md:text-4xl">
+        <h1 className="mt-4 font-display text-3xl font-bold tracking-[-0.03em] text-fg md:text-5xl">
           {project.title}
         </h1>
         <p className="mt-2 text-[15px] text-fg-muted">{project.subtitle}</p>

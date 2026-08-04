@@ -23,7 +23,7 @@ export default function ResumePage() {
   return (
     <div className="container-page py-14 md:py-20">
       <p className="section-label">résumé</p>
-      <h1 className="mt-6 text-2xl font-medium tracking-tight text-fg md:text-3xl">
+      <h1 className="mt-6 font-display text-3xl font-bold tracking-[-0.03em] text-fg md:text-4xl">
         Résumé
       </h1>
       <p className="mt-4 max-w-md text-[15px] leading-relaxed text-fg-muted">

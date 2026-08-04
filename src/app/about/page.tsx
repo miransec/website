@@ -18,7 +18,7 @@ export default function AboutPage() {
       <div className="mt-8 flex items-start gap-5">
         <ProfileAvatar size={64} className="shrink-0" />
         <div className="min-w-0">
-          <h1 className="text-2xl font-medium tracking-tight text-fg md:text-3xl">
+          <h1 className="font-display text-3xl font-bold tracking-[-0.03em] text-fg md:text-4xl">
             {siteConfig.name}
           </h1>
           <p className="mt-1 font-mono-ui text-xs text-fg-subtle">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -8,15 +8,22 @@ import "./globals.css";
 
 const sans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-ibm-plex-sans",
   display: "swap",
 });
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   variable: "--font-ibm-plex-mono",
+  display: "swap",
+});
+
+const display = IBM_Plex_Serif({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-ibm-plex-serif",
   display: "swap",
 });
 
@@ -80,7 +87,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body
-        className={`${sans.variable} ${mono.variable} flex min-h-screen flex-col font-sans antialiased`}
+        className={`${sans.variable} ${mono.variable} ${display.variable} flex min-h-screen flex-col font-sans antialiased`}
       >
         <ThemeProvider>
           <a

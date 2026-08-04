@@ -9,20 +9,20 @@ export default function HomePage() {
 
   return (
     <div className="container-wide py-10 md:py-14">
-      <section className="fade-in max-w-xl">
-        <h1 className="text-3xl font-medium tracking-tight text-fg md:text-4xl">
+      <section className="fade-in max-w-2xl">
+        <h1 className="font-display text-[2.75rem] font-bold leading-[0.95] tracking-[-0.03em] text-fg md:text-6xl md:leading-[0.92]">
           {siteConfig.name}
         </h1>
-        <p className="fade-in-up mt-3 max-w-md text-base leading-snug text-fg-muted md:text-lg md:leading-snug">
+        <p className="fade-in-up mt-5 max-w-md text-[15px] leading-relaxed text-fg-muted md:text-base">
           {siteConfig.tagline}
         </p>
       </section>
 
-      <section className="mt-10 md:mt-12" aria-labelledby="systems-heading">
+      <section className="mt-12 md:mt-14" aria-labelledby="systems-heading">
         <div className="flex items-baseline justify-between gap-4 border-b border-border pb-3">
           <h2
             id="systems-heading"
-            className="font-mono-ui text-xs tracking-[0.08em] text-fg-subtle"
+            className="font-mono-ui text-[11px] tracking-[0.12em] text-fg-subtle"
           >
             SELECTED SYSTEMS
           </h2>
@@ -60,7 +60,7 @@ export default function HomePage() {
       >
         <h2
           id="currently-heading"
-          className="font-mono-ui text-xs tracking-[0.08em] text-fg-subtle"
+          className="font-mono-ui text-[11px] tracking-[0.12em] text-fg-subtle"
         >
           currently
         </h2>

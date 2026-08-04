@@ -37,7 +37,7 @@ export function ProfileAvatar({
       aria-label={`${siteConfig.name} avatar`}
       role="img"
     >
-      <span className="text-2xl font-medium tracking-tight">M</span>
+      <span className="font-display text-2xl font-bold tracking-tight">M</span>
     </div>
   );
 }

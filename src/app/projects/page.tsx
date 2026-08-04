@@ -22,7 +22,7 @@ export default function ProjectsPage() {
       <p className="font-mono-ui text-xs tracking-[0.08em] text-fg-subtle">
         SELECTED SYSTEMS
       </p>
-      <h1 className="mt-4 text-2xl font-medium tracking-tight text-fg md:text-3xl">
+      <h1 className="mt-4 font-display text-3xl font-bold tracking-[-0.03em] text-fg md:text-4xl">
         Work
       </h1>
       <div className="mt-8 grid gap-4 md:grid-cols-2 md:gap-5">
