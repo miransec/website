@@ -38,7 +38,7 @@ export default function ContactPage() {
           />
           <ContactChannel
             label="GitHub"
-            value="Mod-With-Miran"
+            value="miransec"
             href={siteConfig.github.href}
             external
           />

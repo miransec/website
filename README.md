@@ -4,7 +4,7 @@ Personal portfolio for **Miran** — AI Engineer focused on secure, production-o
 
 - Site: [muhammadmiran.com](https://muhammadmiran.com)
 - Email: [contact@muhammadmiran.com](mailto:contact@muhammadmiran.com)
-- GitHub: [Mod-With-Miran](https://github.com/Mod-With-Miran)
+- GitHub: [miransec](https://github.com/miransec)
 
 ## Stack
 

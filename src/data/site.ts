@@ -15,7 +15,7 @@ export const siteConfig = {
     "VaaniDesk v1.0.0 — portfolio release preparation · currently building AtlasCore.",
   github: {
     label: "GitHub",
-    href: "https://github.com/Mod-With-Miran",
+    href: "https://github.com/miransec",
   },
   linkedin: {
     label: "LinkedIn",

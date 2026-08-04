@@ -48,7 +48,7 @@ test.describe("portfolio smoke", () => {
 
     await page.goto("/");
     await expect(
-      page.locator('a[href="https://github.com/Mod-With-Miran"]').first(),
+      page.locator('a[href="https://github.com/miransec"]').first(),
     ).toBeVisible();
 
     await page.goto("/resume");

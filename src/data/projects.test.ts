@@ -74,7 +74,7 @@ describe("navigation and critical links", () => {
   });
 
   it("points GitHub at the known profile", () => {
-    expect(siteConfig.github.href).toBe("https://github.com/Mod-With-Miran");
+    expect(siteConfig.github.href).toBe("https://github.com/miransec");
   });
 
   it("uses the verified professional email", () => {
