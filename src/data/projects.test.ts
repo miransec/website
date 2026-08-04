@@ -26,8 +26,9 @@ describe("project data integrity", () => {
       expect(project.title.length).toBeGreaterThan(0);
       expect(project.links.caseStudy.href).toBe(`/projects/${project.slug}`);
       expect(project.highlights.length).toBeGreaterThanOrEqual(2);
-      expect(project.technologies.length).toBeGreaterThan(0);
-      expect(project.technologies.length).toBeLessThanOrEqual(12);
+      expect(project.techLine.length).toBeGreaterThan(0);
+      expect(project.techLine.length).toBeLessThanOrEqual(5);
+      expect(project.statusShort.length).toBeGreaterThan(0);
     }
   });
 
@@ -71,6 +72,12 @@ describe("navigation and critical links", () => {
       "/writing",
       "/contact",
     ]);
+    expect(navLinks.map((l) => l.label)).toEqual([
+      "work",
+      "about",
+      "writing",
+      "contact",
+    ]);
   });
 
   it("points GitHub at the known profile", () => {
@@ -102,10 +109,11 @@ describe("optional assets", () => {
 });
 
 describe("skills presentation", () => {
-  it("uses categories instead of percentage meters", () => {
-    expect(skillCategories.length).toBeGreaterThanOrEqual(5);
+  it("uses compact categories instead of percentage meters", () => {
+    expect(skillCategories.length).toBeGreaterThanOrEqual(4);
     for (const category of skillCategories) {
       expect(category.skills.length).toBeGreaterThan(0);
+      expect(category.skills.length).toBeLessThanOrEqual(6);
     }
   });
 });

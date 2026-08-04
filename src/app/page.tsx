@@ -1,72 +1,126 @@
-import { Button } from "@/components/Button";
-import { ProjectCard } from "@/components/ProjectCard";
-import { getFeaturedProjects } from "@/data/projects";
+import Link from "next/link";
+import { ProjectRow } from "@/components/ProjectRow";
+import { getFeaturedProjects, vaanideskMetrics } from "@/data/projects";
 import { siteConfig } from "@/data/site";
 
 export default function HomePage() {
   const featured = getFeaturedProjects();
+  const vaanideskLine = `${vaanideskMetrics.backendTests.passed} tests · ${vaanideskMetrics.evaluations.passed} evaluations · ${vaanideskMetrics.e2e.playwrightPassed} browser E2E tests`;
 
   return (
-    <>
-      <section className="relative overflow-hidden border-b border-border">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.35] dark:opacity-[0.45]"
-          aria-hidden="true"
-          style={{
-            backgroundImage:
-              "radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-muted), transparent), linear-gradient(to bottom, transparent, var(--canvas))",
-          }}
-        />
-        <div className="container-page relative py-16 md:py-24 lg:py-28">
-          <p className="fade-in text-sm font-medium tracking-wide text-accent-fg">
-            {siteConfig.positioning}
-          </p>
-          <h1 className="fade-in-up mt-4 text-4xl font-medium tracking-tight text-fg sm:text-5xl md:mt-5 md:text-6xl lg:text-7xl">
-            {siteConfig.name}
-          </h1>
-          <p className="fade-in-up mt-4 max-w-2xl text-lg text-fg text-balance sm:text-xl md:mt-5 md:text-2xl">
-            {siteConfig.tagline}
-          </p>
-          <p className="fade-in-up mt-4 max-w-xl text-base leading-relaxed text-fg-muted md:mt-5 md:text-lg">
-            {siteConfig.summary}
-          </p>
-          <div className="fade-in-up mt-7 flex flex-wrap gap-3 md:mt-8">
-            <Button href="/projects">View Projects</Button>
-            <Button href={siteConfig.github.href} variant="secondary" external>
-              GitHub
-            </Button>
-            <Button href="/contact" variant="ghost">
-              Contact
-            </Button>
-          </div>
-          <p className="fade-in-up mt-7 text-sm text-fg-subtle md:mt-8">
-            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle" />
-            {siteConfig.statusLine}
-          </p>
+    <div className="container-page py-14 md:py-20">
+      <section className="fade-in max-w-xl">
+        <p className="font-mono-ui text-sm text-fg-subtle">
+          {siteConfig.brandPath}
+        </p>
+        <h1 className="sr-only">{siteConfig.name}</h1>
+        <p className="fade-in-up mt-6 text-2xl font-medium tracking-tight text-fg text-balance md:text-[1.75rem] md:leading-snug">
+          {siteConfig.tagline}
+        </p>
+        <p className="fade-in-up mt-4 text-[15px] leading-relaxed text-fg-muted">
+          {siteConfig.summary}
+        </p>
+        <p className="fade-in-up mt-5 font-mono-ui text-xs text-fg-subtle">
+          {siteConfig.statusLine}
+        </p>
+        <div className="fade-in-up mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-fg transition-colors duration-200 hover:text-accent-fg"
+          >
+            View work
+            <span className="font-mono-ui text-fg-subtle" aria-hidden="true">
+              →
+            </span>
+          </Link>
+          <a
+            href={siteConfig.github.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono-ui text-sm text-fg-subtle transition-colors duration-200 hover:text-fg"
+          >
+            GitHub
+          </a>
         </div>
       </section>
 
-      <section className="container-page py-16 md:py-20">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-medium tracking-tight text-fg">
-              Featured projects
-            </h2>
-            <p className="mt-2 max-w-xl text-sm text-fg-muted">
-              Production-oriented systems with measurable engineering depth —
-              not demo chatbots.
-            </p>
-          </div>
-          <Button href="/projects" variant="ghost" className="hidden sm:inline-flex">
-            All projects
-          </Button>
-        </div>
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+      <section className="mt-16 md:mt-20" aria-labelledby="work-heading">
+        <h2 id="work-heading" className="section-label">
+          01 / selected work
+        </h2>
+        <div className="mt-4">
           {featured.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+            <ProjectRow
+              key={project.slug}
+              project={project}
+              quietMetrics={
+                project.slug === "vaanidesk" ? vaanideskLine : undefined
+              }
+            />
           ))}
         </div>
       </section>
-    </>
+
+      <section className="mt-14 md:mt-16" aria-labelledby="currently-heading">
+        <h2 id="currently-heading" className="section-label">
+          02 / currently
+        </h2>
+        <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-fg-muted">
+          {siteConfig.currently}
+        </p>
+      </section>
+
+      <section className="mt-14 md:mt-16" aria-labelledby="about-heading">
+        <h2 id="about-heading" className="section-label">
+          about
+        </h2>
+        <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-fg-muted">
+          {siteConfig.aboutBlurb}
+        </p>
+        <Link
+          href="/about"
+          className="mt-4 inline-flex font-mono-ui text-xs text-fg-subtle transition-colors duration-200 hover:text-fg"
+        >
+          more →
+        </Link>
+      </section>
+
+      <section className="mt-14 md:mt-16" aria-labelledby="contact-heading">
+        <h2 id="contact-heading" className="section-label">
+          03 / contact
+        </h2>
+        <p className="mt-4 text-[15px] text-fg-muted">
+          Have something interesting to build or discuss?
+        </p>
+        <a
+          href={siteConfig.email.href}
+          className="mt-3 inline-block font-mono-ui text-sm text-accent-fg transition-colors duration-200 hover:underline"
+        >
+          {siteConfig.email.address}
+        </a>
+        <div className="mt-4 flex flex-wrap gap-4 font-mono-ui text-xs text-fg-subtle">
+          <a
+            href={siteConfig.github.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-fg"
+          >
+            GitHub
+          </a>
+          {siteConfig.linkedin.href ? (
+            <a
+              href={siteConfig.linkedin.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-fg"
+            >
+              LinkedIn
+            </a>
+          ) : (
+            <span>LinkedIn — soon</span>
+          )}
+        </div>
+      </section>
+    </div>
   );
 }

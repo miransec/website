@@ -7,79 +7,67 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About Miran — AI/software engineer focused on agentic systems, RAG, backend engineering, AI security, evaluation, and multi-tenant architecture.",
+    "About Miran — AI engineer focused on systems where models work inside reliable engineering boundaries.",
   alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
   return (
-    <div className="container-page py-16 md:py-20">
-      <div className="grid gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
-        <div className="flex flex-col items-start gap-4">
-          <ProfileAvatar size={112} />
-          <ResumeCta />
-          <a
-            href={siteConfig.email.href}
-            className="text-sm text-accent-fg hover:underline"
-          >
-            {siteConfig.email.address}
-          </a>
-        </div>
-
-        <div className="max-w-2xl">
-          <h1 className="text-3xl font-medium tracking-tight text-fg md:text-4xl">
-            About
+    <div className="container-page py-14 md:py-20">
+      <p className="section-label">about</p>
+      <div className="mt-8 flex items-start gap-5">
+        <ProfileAvatar size={64} className="shrink-0" />
+        <div className="min-w-0">
+          <h1 className="text-2xl font-medium tracking-tight text-fg md:text-3xl">
+            {siteConfig.name}
           </h1>
-          <p className="mt-6 text-base leading-relaxed text-fg-muted md:text-lg">
-            I am an AI/software engineer focused on building systems where AI
-            models work inside reliable engineering boundaries.
-          </p>
-          <p className="mt-4 text-base leading-relaxed text-fg-muted">
-            My work sits at the intersection of model intelligence and the
-            production concerns that make AI usable in real environments:
-            retrieval quality, authorization, evaluation, observability, and
-            service architecture. I care about systems that remain inspectable
-            and controllable after the demo ends.
-          </p>
-          <p className="mt-4 text-base leading-relaxed text-fg-muted">
-            Areas of focus include agentic systems, retrieval-augmented
-            generation, backend engineering, AI security, evaluation,
-            multi-tenant systems, distributed/service architecture, and
-            observability.
-          </p>
-          <p className="mt-4 text-sm text-fg-subtle">
-            {siteConfig.positioning}
+          <p className="mt-1 font-mono-ui text-xs text-fg-subtle">
+            AI / systems / security
           </p>
         </div>
       </div>
 
-      <section className="mt-16">
-        <h2 className="text-2xl font-medium tracking-tight text-fg">Skills</h2>
-        <p className="mt-2 max-w-2xl text-sm text-fg-muted">
-          Grouped by practice area. These reflect tools and techniques already
-          exercised in the projects presented on this site.
+      <div className="mt-10 max-w-xl space-y-4 text-[15px] leading-relaxed text-fg-muted">
+        <p>
+          I am an AI/software engineer focused on building systems where AI
+          models work inside reliable engineering boundaries.
         </p>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <p>{siteConfig.aboutBlurb}</p>
+        <p>
+          Interests include agentic systems, retrieval-augmented generation,
+          backend engineering, AI security, evaluation, multi-tenant systems,
+          and observability.
+        </p>
+      </div>
+
+      <div className="mt-8">
+        <ResumeCta />
+      </div>
+
+      <section className="mt-14">
+        <h2 className="section-label">skills</h2>
+        <dl className="mt-6 space-y-5">
           {skillCategories.map((category) => (
-            <div
-              key={category.title}
-              className="rounded-lg border border-border bg-surface p-5"
-            >
-              <h3 className="text-sm font-medium text-fg">{category.title}</h3>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <li
-                    key={skill}
-                    className="rounded border border-border bg-canvas px-2 py-1 text-xs text-fg-muted"
-                  >
-                    {skill}
-                  </li>
-                ))}
-              </ul>
+            <div key={category.title}>
+              <dt className="font-mono-ui text-xs text-fg-subtle">
+                {category.title}
+              </dt>
+              <dd className="mt-1 text-sm text-fg-muted">
+                {category.skills.join(" · ")}
+              </dd>
             </div>
           ))}
-        </div>
+        </dl>
       </section>
+
+      <p className="mt-12 font-mono-ui text-xs text-fg-subtle">
+        <a
+          href={siteConfig.email.href}
+          className="text-accent-fg hover:underline"
+        >
+          {siteConfig.email.address}
+        </a>
+      </p>
     </div>
   );
 }

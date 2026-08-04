@@ -29,16 +29,19 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-canvas/85 backdrop-blur-md">
-      <div className="container-page flex h-14 items-center justify-between gap-4 md:h-16">
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-canvas/90 backdrop-blur-sm">
+      <div className="container-page flex h-12 items-center justify-between gap-4 md:h-14">
         <Link
           href="/"
-          className="font-medium tracking-tight text-fg transition-colors hover:text-accent-fg"
+          className="font-mono-ui text-sm text-fg transition-colors duration-200 hover:text-accent-fg"
         >
-          {siteConfig.name}
+          {siteConfig.brandPath}
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+        <nav
+          className="hidden items-center gap-5 md:flex"
+          aria-label="Primary"
+        >
           {navLinks.map((link) => {
             const active =
               pathname === link.href || pathname.startsWith(`${link.href}/`);
@@ -47,10 +50,10 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={[
-                  "rounded-md px-3 py-2 text-sm transition-colors",
+                  "font-mono-ui text-[13px] transition-colors duration-200",
                   active
                     ? "text-fg"
-                    : "text-fg-muted hover:bg-surface-hover hover:text-fg",
+                    : "text-fg-subtle hover:text-fg",
                 ].join(" ")}
                 aria-current={active ? "page" : undefined}
               >
@@ -65,24 +68,15 @@ export function Header() {
             href={siteConfig.github.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-md px-3 py-2 text-sm text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg sm:inline-flex"
+            className="hidden font-mono-ui px-2 py-1 text-[13px] text-fg-subtle transition-colors duration-200 hover:text-fg sm:inline-flex"
+            aria-label="GitHub"
           >
-            GitHub
+            github
           </a>
-          {siteConfig.linkedin.href ? (
-            <a
-              href={siteConfig.linkedin.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden rounded-md px-3 py-2 text-sm text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg sm:inline-flex"
-            >
-              LinkedIn
-            </a>
-          ) : null}
           <ThemeToggle />
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md p-2 text-fg-muted hover:bg-surface-hover hover:text-fg md:hidden"
+            className="inline-flex items-center justify-center rounded p-2 text-fg-muted hover:text-fg md:hidden"
             aria-expanded={open}
             aria-controls={menuId}
             aria-label={open ? "Close menu" : "Open menu"}
@@ -90,8 +84,8 @@ export function Header() {
           >
             <span className="sr-only">{open ? "Close" : "Menu"}</span>
             <svg
-              width="20"
-              height="20"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -116,7 +110,10 @@ export function Header() {
           aria-modal="true"
           aria-label="Mobile navigation"
         >
-          <nav className="container-page flex flex-col gap-1 py-4" aria-label="Mobile">
+          <nav
+            className="container-page flex flex-col gap-1 py-3"
+            aria-label="Mobile"
+          >
             {navLinks.map((link) => {
               const active =
                 pathname === link.href || pathname.startsWith(`${link.href}/`);
@@ -125,10 +122,8 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   className={[
-                    "rounded-md px-3 py-3 text-base transition-colors",
-                    active
-                      ? "bg-surface text-fg"
-                      : "text-fg-muted hover:bg-surface-hover hover:text-fg",
+                    "font-mono-ui rounded px-2 py-2.5 text-sm transition-colors",
+                    active ? "text-fg" : "text-fg-muted hover:text-fg",
                   ].join(" ")}
                   aria-current={active ? "page" : undefined}
                 >
@@ -140,9 +135,9 @@ export function Header() {
               href={siteConfig.github.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md px-3 py-3 text-base text-fg-muted hover:bg-surface-hover hover:text-fg"
+              className="font-mono-ui rounded px-2 py-2.5 text-sm text-fg-muted hover:text-fg"
             >
-              GitHub
+              github
             </a>
           </nav>
         </div>

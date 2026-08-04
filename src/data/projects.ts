@@ -18,6 +18,12 @@ export type Project = {
   description: string;
   status: ProjectStatus;
   statusLabel: string;
+  /** Compact monospace status for list views */
+  statusShort: string;
+  /** 3–5 focus terms for homepage rows */
+  focus: string[];
+  /** Compact tech line for list views */
+  techLine: string[];
   featured: boolean;
   technologies: string[];
   highlights: string[];
@@ -35,13 +41,16 @@ export const projects: Project[] = [
   {
     slug: "vaanidesk",
     title: "VaaniDesk",
-    subtitle: "Multilingual AI Customer Support Platform",
+    subtitle: "Multilingual AI customer support",
     shortDescription:
       "Production-oriented multilingual AI support with controlled agent workflows, hybrid retrieval, evaluations, and security controls.",
     description:
       "A production-oriented multilingual AI support system combining controlled agent workflows, real business tools, hybrid retrieval, source citations, evaluation, and security controls.",
     status: "engineering-complete",
     statusLabel: "v1.0.0 — Engineering complete / portfolio release preparation",
+    statusShort: "v1.0.0",
+    focus: ["Controlled agents", "RAG", "security", "evaluation"],
+    techLine: ["FastAPI", "PostgreSQL", "RAG", "Next.js"],
     featured: true,
     technologies: [
       "Python",
@@ -82,13 +91,16 @@ export const projects: Project[] = [
   {
     slug: "atlascore",
     title: "AtlasCore",
-    subtitle: "Secure Enterprise AI Operations Platform",
+    subtitle: "Secure enterprise AI infrastructure",
     shortDescription:
       "Multi-tenant enterprise AI platform focused on secure tenancy, authentication, RBAC, and auditable operations — in active development.",
     description:
       "A multi-tenant enterprise AI platform designed for secure knowledge access, controlled automation, organizational isolation and auditable AI workflows. Phase 1 engineering prioritizes tenancy and security foundations.",
     status: "in-development",
     statusLabel: "In active development",
+    statusShort: "building",
+    focus: ["RLS", "RBAC", "identity", "audit"],
+    techLine: ["PostgreSQL RLS", "RBAC", "FastAPI", "Redis"],
     featured: true,
     technologies: [
       "Python",
@@ -198,45 +210,20 @@ export const atlascoreRoadmap = [
 
 export const skillCategories = [
   {
-    title: "AI / ML",
-    skills: [
-      "Python",
-      "LLM APIs",
-      "RAG",
-      "Embeddings",
-      "AI Agents",
-      "Structured Outputs",
-      "Evaluation",
-      "Multilingual AI",
-    ],
+    title: "AI",
+    skills: ["Python", "agents", "RAG", "evaluation"],
   },
   {
-    title: "Backend",
-    skills: ["FastAPI", "PostgreSQL", "SQLAlchemy", "Redis", "REST APIs"],
-  },
-  {
-    title: "Infrastructure",
-    skills: ["Docker", "GitHub Actions", "OpenTelemetry", "Linux", "Nginx"],
+    title: "Systems",
+    skills: ["FastAPI", "PostgreSQL", "Redis", "Docker"],
   },
   {
     title: "Security",
-    skills: [
-      "RBAC",
-      "PostgreSQL RLS",
-      "Authorization",
-      "Secret Management",
-      "Prompt Injection Defenses",
-      "Idempotency",
-      "Audit Logging",
-    ],
+    skills: ["authorization", "RLS", "audit", "AI security"],
   },
   {
     title: "Frontend",
-    skills: ["Next.js", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    title: "Testing",
-    skills: ["pytest", "Playwright", "Ruff", "mypy"],
+    skills: ["Next.js", "TypeScript"],
   },
 ] as const;
 

@@ -21,26 +21,25 @@ export default function ResumePage() {
   const available = siteConfig.resume.available && existsSync(resumePath);
 
   return (
-    <div className="container-page py-16 md:py-20">
-      <header className="max-w-2xl">
-        <h1 className="text-3xl font-medium tracking-tight text-fg md:text-4xl">
-          Résumé
-        </h1>
-        <p className="mt-4 text-base leading-relaxed text-fg-muted">
-          {available
-            ? "Download the current résumé PDF."
-            : "The résumé PDF is not published yet. This route is prepared for when the file is added at public/resume.pdf."}
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <ResumeCta />
-          <Link
-            href="/contact"
-            className="inline-flex items-center rounded-md px-4 py-2.5 text-sm text-fg-muted hover:bg-surface-hover hover:text-fg"
-          >
-            Contact
-          </Link>
-        </div>
-      </header>
+    <div className="container-page py-14 md:py-20">
+      <p className="section-label">résumé</p>
+      <h1 className="mt-6 text-2xl font-medium tracking-tight text-fg md:text-3xl">
+        Résumé
+      </h1>
+      <p className="mt-4 max-w-md text-[15px] leading-relaxed text-fg-muted">
+        {available
+          ? "Download the current résumé PDF."
+          : "The résumé PDF is not published yet."}
+      </p>
+      <div className="mt-8 flex flex-wrap items-center gap-4">
+        <ResumeCta />
+        <Link
+          href="/contact"
+          className="font-mono-ui text-xs text-fg-subtle hover:text-fg"
+        >
+          contact →
+        </Link>
+      </div>
     </div>
   );
 }

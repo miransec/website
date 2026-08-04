@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { VaaniDeskArchitecture } from "@/components/ArchitectureDiagram";
 import {
+  CaseStudyMeta,
   CaseStudySection,
   MetricGrid,
   TagList,
@@ -27,60 +28,66 @@ export default function VaaniDeskPage() {
 
   return (
     <article className="container-page py-14 md:py-20">
-      <nav className="text-sm text-fg-subtle" aria-label="Breadcrumb">
+      <nav className="font-mono-ui text-xs text-fg-subtle" aria-label="Breadcrumb">
         <Link href="/projects" className="hover:text-fg">
-          Projects
+          work
         </Link>
         <span className="mx-2" aria-hidden="true">
           /
         </span>
-        <span className="text-fg-muted">VaaniDesk</span>
+        <span className="text-fg-muted">vaanidesk</span>
       </nav>
 
-      <header className="mt-6 max-w-2xl">
-        <p className="text-sm font-medium text-accent-fg">{project.subtitle}</p>
-        <h1 className="mt-2 text-3xl font-medium tracking-tight text-fg md:text-5xl">
+      <header className="mt-8 max-w-2xl">
+        <p className="font-mono-ui text-xs text-fg-subtle">
+          ~/projects/vaanidesk
+        </p>
+        <h1 className="mt-3 text-3xl font-medium tracking-tight text-fg md:text-4xl">
           {project.title}
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-fg-muted md:text-lg">
+        <p className="mt-2 text-[15px] text-fg-muted">{project.subtitle}</p>
+        <CaseStudyMeta
+          rows={[
+            { label: "status", value: project.statusShort },
+            { label: "role", value: "engineering" },
+            { label: "focus", value: "agents / RAG / security" },
+          ]}
+        />
+        <p className="mt-6 text-[15px] leading-relaxed text-fg-muted">
           {project.description}
         </p>
-        <p className="mt-4 inline-flex rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-fg-muted">
+        <p className="mt-4 font-mono-ui text-xs text-fg-subtle">
           {vaanideskMetrics.label}
         </p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-wrap gap-4 font-mono-ui text-xs text-fg-subtle">
           {project.links.github.href ? (
             <a
               href={project.links.github.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-md border border-border-strong px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:bg-surface-hover"
+              className="hover:text-fg"
             >
-              GitHub
+              repository →
             </a>
           ) : (
-            <span className="inline-flex items-center rounded-md border border-border px-4 py-2.5 text-sm text-fg-subtle">
-              Repository coming soon
-            </span>
+            <span>repository coming soon</span>
           )}
           {project.links.demo?.href ? (
             <a
               href={project.links.demo.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-md border border-border-strong px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:bg-surface-hover"
+              className="hover:text-fg"
             >
-              Demo
+              demo →
             </a>
           ) : (
-            <span className="inline-flex items-center rounded-md border border-border px-4 py-2.5 text-sm text-fg-subtle">
-              Demo coming soon
-            </span>
+            <span>demo coming soon</span>
           )}
         </div>
       </header>
 
-      <div className="mt-14 max-w-2xl space-y-14 md:mt-16 md:space-y-16">
+      <div className="mt-14 max-w-2xl space-y-12 md:mt-16 md:space-y-14">
         <CaseStudySection title="Overview">
           <p>
             VaaniDesk is a production-oriented multilingual AI customer support

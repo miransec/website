@@ -35,7 +35,7 @@ export function VaaniDeskArchitecture() {
       <div className="grid gap-3">
         {layers.map((layer, index) => (
           <div key={layer.title}>
-            <div className="rounded-md border border-border bg-canvas px-4 py-3">
+            <div className="rounded-md border border-border bg-canvas/50 px-4 py-3">
               <p className="text-sm font-medium text-fg">{layer.title}</p>
               <ul className="mt-2 flex flex-wrap gap-2">
                 {layer.items.map((item) => (
@@ -110,7 +110,7 @@ export function AtlasCoreArchitecture() {
       <div className="grid gap-3">
         {layers.map((layer, index) => (
           <div key={layer.title}>
-            <div className="rounded-md border border-border bg-canvas px-4 py-3">
+            <div className="rounded-md border border-border bg-canvas/50 px-4 py-3">
               <p className="text-sm font-medium text-fg">{layer.title}</p>
               <ul className="mt-2 flex flex-wrap gap-2">
                 {layer.items.map((item) => (

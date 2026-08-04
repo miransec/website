@@ -1,7 +1,6 @@
 import { existsSync } from "fs";
 import path from "path";
 import { siteConfig } from "@/data/site";
-import { Button } from "./Button";
 
 export function ResumeCta({ className = "" }: { className?: string }) {
   const resumePath = path.join(
@@ -14,22 +13,22 @@ export function ResumeCta({ className = "" }: { className?: string }) {
   if (!available) {
     return (
       <span
-        className={`inline-flex items-center rounded-md border border-border px-4 py-2.5 text-sm text-fg-subtle ${className}`}
+        className={`font-mono-ui text-xs text-fg-subtle ${className}`}
       >
-        Résumé coming soon
+        résumé coming soon
       </span>
     );
   }
 
   return (
-    <Button
+    <a
       href={siteConfig.resume.path}
-      variant="secondary"
-      external
-      className={className}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`font-mono-ui text-xs text-accent-fg hover:underline ${className}`}
       aria-label="Download résumé PDF"
     >
-      Download résumé
-    </Button>
+      download résumé →
+    </a>
   );
 }

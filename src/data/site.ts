@@ -7,12 +7,15 @@ export const siteConfig = {
   url: "https://muhammadmiran.com",
   domain: "muhammadmiran.com",
   locale: "en_US",
-  positioning: "AI Engineer · Agentic Systems · RAG · Backend · Security",
-  tagline: "AI Engineer building secure, production-oriented AI systems.",
+  brandPath: "miran/",
+  tagline: "AI engineer building secure, intelligent systems.",
   summary:
-    "I build AI systems that combine model intelligence with reliable backend engineering, retrieval, security, evaluation, and production infrastructure.",
-  statusLine:
-    "VaaniDesk v1.0.0 — portfolio release preparation · currently building AtlasCore.",
+    "I build AI systems where models work inside reliable backend, retrieval and security boundaries.",
+  currently:
+    "Building secure AI systems and exploring the intersection of artificial intelligence and cybersecurity.",
+  aboutBlurb:
+    "I like building systems where AI is useful because of the engineering around it — retrieval, permissions, APIs, evaluation and security.",
+  statusLine: "> currently building production AI systems",
   github: {
     label: "GitHub",
     href: "https://github.com/miransec",
@@ -39,8 +42,8 @@ export const siteConfig = {
 export type SiteConfig = typeof siteConfig;
 
 export const navLinks = [
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/writing", label: "Writing" },
-  { href: "/contact", label: "Contact" },
+  { href: "/projects", label: "work" },
+  { href: "/about", label: "about" },
+  { href: "/writing", label: "writing" },
+  { href: "/contact", label: "contact" },
 ] as const;
