@@ -1,13 +1,20 @@
 # Project screenshots
 
-AtlasCore product screenshots are not published in this portfolio yet.
+Real AtlasCore UI captures belong here:
 
-When real UI captures are available, place them here. Suggested naming:
-
+- `ask-ai.png` (primary / hero)
 - `dashboard.png`
-- `ask-ai.png`
-- `knowledge.png`
 - `workspaces.png`
+- `knowledge.png`
+- `search.png`
+- `security.png`
 
-Do not commit fabricated UI mockups presented as product screenshots.
-The case study uses a typography product panel until real assets exist.
+Capture from a running AtlasCore frontend (SSH tunnel to `http://localhost:3100`):
+
+```powershell
+$env:ATLASCORE_SCREENSHOT_EMAIL="..."
+$env:ATLASCORE_SCREENSHOT_PASSWORD="..."
+npm run screenshots:atlascore
+```
+
+Do not commit fabricated UI mockups. Do not put credentials in this file.

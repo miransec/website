@@ -12,6 +12,17 @@ import {
   vaanideskMetrics,
 } from "@/data/projects";
 import { navLinks, siteConfig } from "@/data/site";
+import {
+  getWritingArticle,
+  getWritingSlugs,
+  readingMinutes,
+  wordCount,
+  writingArticles,
+} from "@/data/writing";
+import {
+  atlascoreScreenshotFiles,
+  atlascoreScreenshotSrc,
+} from "@/lib/atlascore-screenshots";
 
 describe("project data integrity", () => {
   it("features AtlasCore before VaaniDesk", () => {
@@ -102,6 +113,53 @@ describe("project data integrity", () => {
     ]) {
       expect(existsSync(path.join(dir, name))).toBe(true);
     }
+  });
+
+  it("resolves AtlasCore screenshot paths only when files exist", () => {
+    for (const file of atlascoreScreenshotFiles) {
+      const src = atlascoreScreenshotSrc(file);
+      const full = path.join(
+        process.cwd(),
+        "public",
+        "projects",
+        "atlascore",
+        file,
+      );
+      if (existsSync(full)) {
+        expect(src).toBe(`/projects/atlascore/${file}`);
+      } else {
+        expect(src).toBeNull();
+      }
+    }
+  });
+});
+
+describe("writing notes", () => {
+  it("publishes four engineering notes with metadata", () => {
+    expect(writingArticles).toHaveLength(4);
+    expect(getWritingSlugs()).toEqual([
+      "grounded-ai-abstention",
+      "ai-tenant-isolation",
+      "ai-evaluation-release-gate",
+      "controlled-ai-actions",
+    ]);
+    for (const article of writingArticles) {
+      expect(article.title.length).toBeGreaterThan(10);
+      expect(article.description.length).toBeGreaterThan(20);
+      expect(article.tags.length).toBeGreaterThanOrEqual(2);
+      expect(article.sections.length).toBeGreaterThanOrEqual(4);
+      expect(readingMinutes(article)).toBeGreaterThanOrEqual(3);
+      expect(wordCount(article)).toBeGreaterThanOrEqual(550);
+      expect(getWritingArticle(article.slug)?.slug).toBe(article.slug);
+    }
+  });
+
+  it("does not keep the old writing placeholder copy in article bodies", () => {
+    const blob = writingArticles
+      .map((a) => `${a.title} ${a.description}`)
+      .join(" ")
+      .toLowerCase();
+    expect(blob).not.toContain("will live here");
   });
 });
 

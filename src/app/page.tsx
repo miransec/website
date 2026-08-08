@@ -3,9 +3,11 @@ import { SystemCard } from "@/components/SystemCard";
 import { HeroTagline } from "@/components/HeroTagline";
 import { getFeaturedProjects } from "@/data/projects";
 import { siteConfig } from "@/data/site";
+import { atlascoreScreenshotSrc } from "@/lib/atlascore-screenshots";
 
 export default function HomePage() {
   const featured = getFeaturedProjects();
+  const atlasAskAi = atlascoreScreenshotSrc("ask-ai.png");
 
   return (
     <div className="container-wide py-10 md:py-14">
@@ -86,6 +88,14 @@ export default function HomePage() {
                 key={project.slug}
                 index={index}
                 project={project}
+                image={
+                  atlasAskAi
+                    ? {
+                        src: atlasAskAi,
+                        alt: "AtlasCore Ask AI interface with grounded answer and evidence",
+                      }
+                    : undefined
+                }
                 placeholderLabel="atlascore / workspace ui v2"
                 panelItems={[
                   "FORCE RLS + restricted DB role",

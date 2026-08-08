@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AtlasCoreArchitecture } from "@/components/ArchitectureDiagram";
 import {
+  CaseStudyFigure,
   CaseStudyMeta,
   CaseStudySection,
   MetricGrid,
@@ -15,6 +16,7 @@ import {
   atlascoreUiSurfaces,
   getProjectBySlug,
 } from "@/data/projects";
+import { atlascoreScreenshotSrc } from "@/lib/atlascore-screenshots";
 
 export const metadata: Metadata = {
   title: "AtlasCore",
@@ -26,6 +28,13 @@ export const metadata: Metadata = {
 export default function AtlasCorePage() {
   const project = getProjectBySlug("atlascore");
   if (!project) notFound();
+
+  const askAi = atlascoreScreenshotSrc("ask-ai.png");
+  const dashboard = atlascoreScreenshotSrc("dashboard.png");
+  const workspaces = atlascoreScreenshotSrc("workspaces.png");
+  const knowledge = atlascoreScreenshotSrc("knowledge.png");
+  const search = atlascoreScreenshotSrc("search.png");
+  const security = atlascoreScreenshotSrc("security.png");
 
   return (
     <article className="container-page py-14 md:py-20">
@@ -72,32 +81,42 @@ export default function AtlasCorePage() {
         <p className="mt-6 text-[15px] leading-relaxed text-fg-muted">
           {project.description}
         </p>
-        <div className="mt-6 rounded-sm border border-border bg-surface p-5">
-          <p className="font-mono-ui text-[10px] tracking-wide text-fg-subtle">
-            atlascore / workspace ui v2
-          </p>
-          <div className="mt-4 space-y-2 font-mono-ui text-xs text-fg-muted">
-            <p>
-              <span className="text-accent-fg">→</span> FORCE RLS + restricted
-              runtime DB role
+        {askAi ? (
+          <CaseStudyFigure
+            src={askAi}
+            alt="AtlasCore Ask AI interface showing a grounded answer with supporting evidence"
+            caption="Grounded answering with retrieved evidence and citations."
+            priority
+          />
+        ) : (
+          <div className="mt-6 rounded-sm border border-border bg-surface p-5">
+            <p className="font-mono-ui text-[10px] tracking-wide text-fg-subtle">
+              atlascore / workspace ui v2
             </p>
-            <p>
-              <span className="text-accent-fg">→</span> Hybrid FTS + pgvector +
-              RRF retrieval
-            </p>
-            <p>
-              <span className="text-accent-fg">→</span> Evidence-first Ask AI
-              with abstention
-            </p>
-            <p>
-              <span className="text-accent-fg">→</span> Workspace selector and
-              admin surfaces
+            <div className="mt-4 space-y-2 font-mono-ui text-xs text-fg-muted">
+              <p>
+                <span className="text-accent-fg">→</span> FORCE RLS + restricted
+                runtime DB role
+              </p>
+              <p>
+                <span className="text-accent-fg">→</span> Hybrid FTS + pgvector +
+                RRF retrieval
+              </p>
+              <p>
+                <span className="text-accent-fg">→</span> Evidence-first Ask AI
+                with abstention
+              </p>
+              <p>
+                <span className="text-accent-fg">→</span> Workspace selector and
+                admin surfaces
+              </p>
+            </div>
+            <p className="mt-5 font-mono-ui text-[10px] text-fg-subtle">
+              product panel · capture real screenshots via npm run
+              screenshots:atlascore
             </p>
           </div>
-          <p className="mt-5 font-mono-ui text-[10px] text-fg-subtle">
-            product panel · no fabricated screenshots
-          </p>
-        </div>
+        )}
         <div className="mt-6 font-mono-ui text-xs text-fg-subtle">
           {project.links.github.href ? (
             <a
@@ -165,6 +184,13 @@ export default function AtlasCorePage() {
             revalidated live — no hardcoded workspace IDs. RBAC, invitations,
             teams, service accounts, and API keys sit on top of that foundation.
           </p>
+          {security ? (
+            <CaseStudyFigure
+              src={security}
+              alt="AtlasCore security administration surface for workspace controls"
+              caption="Security and workspace administration remain separate from model behavior."
+            />
+          ) : null}
         </CaseStudySection>
 
         <CaseStudySection title="Knowledge ingestion and hybrid retrieval">
@@ -175,6 +201,20 @@ export default function AtlasCorePage() {
             Fusion, so answers can draw from lexical and semantic matches under
             the same access controls that protect the underlying rows.
           </p>
+          {knowledge ? (
+            <CaseStudyFigure
+              src={knowledge}
+              alt="AtlasCore knowledge sources and documents scoped to a workspace"
+              caption="Knowledge sources and documents remain scoped to workspace context."
+            />
+          ) : null}
+          {search ? (
+            <CaseStudyFigure
+              src={search}
+              alt="AtlasCore search results from hybrid lexical and vector retrieval"
+              caption="Hybrid retrieval combines lexical and vector search before grounded generation."
+            />
+          ) : null}
         </CaseStudySection>
 
         <CaseStudySection title="Grounded answering">
@@ -204,6 +244,20 @@ export default function AtlasCorePage() {
           <p className="font-mono-ui text-xs text-fg-subtle">
             Surfaces: {atlascoreUiSurfaces.join(" · ")}
           </p>
+          {dashboard ? (
+            <CaseStudyFigure
+              src={dashboard}
+              alt="AtlasCore UI v2 dashboard with sidebar and workspace-scoped overview"
+              caption="Workspace-scoped product surface in AtlasCore UI v2."
+            />
+          ) : null}
+          {workspaces ? (
+            <CaseStudyFigure
+              src={workspaces}
+              alt="AtlasCore workspace management interface for creating and switching workspaces"
+              caption="Users can create and switch workspace context from the UI."
+            />
+          ) : null}
           <p className="text-sm text-fg-subtle">
             Latest verified UI commit:{" "}
             <span className="font-mono-ui text-fg-muted">

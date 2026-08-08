@@ -13,8 +13,8 @@
 /test-results
 /playwright-report
 /blob-report
-/playwright/.cache
 /screenshots
+/playwright/.cache
 
 # next.js
 /.next/

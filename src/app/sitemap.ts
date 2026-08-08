@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getWritingSlugs } from "@/data/writing";
 import { siteConfig } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/projects/atlascore",
     "/about",
     "/writing",
+    ...getWritingSlugs().map((slug) => `/writing/${slug}`),
     "/contact",
     "/resume",
   ];
@@ -17,6 +19,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${siteConfig.url}${route}`,
     lastModified: new Date(),
     changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : route.startsWith("/projects/") ? 0.9 : 0.7,
+    priority:
+      route === ""
+        ? 1
+        : route.startsWith("/projects/")
+          ? 0.9
+          : route.startsWith("/writing/")
+            ? 0.75
+            : 0.7,
   }));
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SystemCard } from "@/components/SystemCard";
 import { getFeaturedProjects, projects } from "@/data/projects";
+import { atlascoreScreenshotSrc } from "@/lib/atlascore-screenshots";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   const featured = getFeaturedProjects();
   const list = featured.length ? featured : projects;
+  const atlasAskAi = atlascoreScreenshotSrc("ask-ai.png");
 
   return (
     <div className="container-wide py-12 md:py-16">
@@ -42,6 +44,14 @@ export default function ProjectsPage() {
               key={project.slug}
               index={index}
               project={project}
+              image={
+                atlasAskAi
+                  ? {
+                      src: atlasAskAi,
+                      alt: "AtlasCore Ask AI interface with grounded answer and evidence",
+                    }
+                  : undefined
+              }
               placeholderLabel="atlascore / workspace ui v2"
               panelItems={[
                 "FORCE RLS + restricted DB role",

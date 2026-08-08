@@ -34,8 +34,24 @@ test.describe("portfolio smoke", () => {
     await expect(page).toHaveURL(/\/about$/);
 
     await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "writing" }).click();
+    await expect(page.getByRole("heading", { name: "Engineering notes" })).toBeVisible();
     await expect(
-      page.getByText(/Technical notes on secure AI systems/),
+      page.getByText(/retrieval, authorization, evaluation, and security matter/),
+    ).toBeVisible();
+    await expect(page.getByText(/will live here/i)).toHaveCount(0);
+    await expect(
+      page.getByRole("link", {
+        name: /Why Grounded AI Should Be Allowed to Say/,
+      }),
+    ).toBeVisible();
+    await page
+      .getByRole("link", { name: /Why Grounded AI Should Be Allowed to Say/ })
+      .click();
+    await expect(page).toHaveURL(/\/writing\/grounded-ai-abstention/);
+    await expect(
+      page.getByRole("heading", {
+        name: /Why Grounded AI Should Be Allowed to Say/,
+      }),
     ).toBeVisible();
 
     await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "contact" }).click();
