@@ -78,7 +78,7 @@ test.describe("portfolio smoke", () => {
     await expect(page.getByText(siteConfigEmail).first()).toBeVisible();
     await expect(
       page.locator(
-        'a[href="https://www.linkedin.com/in/muhammad-miran-3672a242"]',
+        'a[href="https://www.linkedin.com/in/miransec/"]',
       ),
     ).toBeVisible();
     await expect(page.getByText(/LinkedIn.*coming soon/i)).toHaveCount(0);
@@ -89,7 +89,7 @@ test.describe("portfolio smoke", () => {
     ).toBeVisible();
     await expect(
       page.locator(
-        'a[href="https://www.linkedin.com/in/muhammad-miran-3672a242"]',
+        'a[href="https://www.linkedin.com/in/miransec/"]',
       ).first(),
     ).toBeVisible();
 

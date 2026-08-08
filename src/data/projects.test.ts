@@ -132,7 +132,7 @@ describe("navigation and critical links", () => {
 
   it("points LinkedIn at the public profile", () => {
     expect(siteConfig.linkedin.href).toBe(
-      "https://www.linkedin.com/in/muhammad-miran-3672a242",
+      "https://www.linkedin.com/in/miransec/",
     );
     expect(siteConfig.linkedin.placeholder).toBe(false);
   });

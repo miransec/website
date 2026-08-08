@@ -23,7 +23,7 @@ export const siteConfig = {
   },
   linkedin: {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/muhammad-miran-3672a242",
+    href: "https://www.linkedin.com/in/miransec/",
     placeholder: false,
   },
   email: {
