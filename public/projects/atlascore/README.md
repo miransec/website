@@ -1,12 +1,13 @@
 # Project screenshots
 
-AtlasCore screenshots are pending while the platform remains in active development.
+AtlasCore product screenshots are not published in this portfolio yet.
 
-When ready, place real screenshots here. Suggested naming:
+When real UI captures are available, place them here. Suggested naming:
 
-- `overview.png`
-- `tenancy.png`
-- `audit.png`
+- `dashboard.png`
+- `ask-ai.png`
+- `knowledge.png`
+- `workspaces.png`
 
 Do not commit fabricated UI mockups presented as product screenshots.
-Case-study pages intentionally omit image blocks until real assets exist.
+The case study uses a typography product panel until real assets exist.

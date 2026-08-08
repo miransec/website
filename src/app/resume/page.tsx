@@ -29,7 +29,7 @@ export default function ResumePage() {
       <p className="mt-4 max-w-md text-[15px] leading-relaxed text-fg-muted">
         {available
           ? "Download the current résumé PDF."
-          : "The résumé PDF is not published yet."}
+          : "The résumé PDF is not published yet. For now, use the project case studies or email contact@muhammadmiran.com."}
       </p>
       <div className="mt-8 flex flex-wrap items-center gap-4">
         <ResumeCta />
@@ -39,6 +39,24 @@ export default function ResumePage() {
         >
           contact →
         </Link>
+        <a
+          href={siteConfig.github.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono-ui text-xs text-fg-subtle hover:text-fg"
+        >
+          github →
+        </a>
+        {siteConfig.linkedin.href ? (
+          <a
+            href={siteConfig.linkedin.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono-ui text-xs text-fg-subtle hover:text-fg"
+          >
+            linkedin →
+          </a>
+        ) : null}
       </div>
     </div>
   );

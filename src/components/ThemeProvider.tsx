@@ -9,7 +9,7 @@ import {
   type ReactNode,
 } from "react";
 
-type Theme = "light" | "dark";
+type Theme = "light" | "dark" | "midnight";
 
 type ThemeContextValue = {
   theme: Theme;
@@ -34,10 +34,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = window.localStorage.getItem("theme") as Theme | null;
-    const initial = stored === "light" || stored === "dark" ? stored : getSystemTheme();
+    const initial = stored === "light" || stored === "dark" || stored === "midnight" ? stored : getSystemTheme();
     setThemeState(initial);
     setResolvedTheme(initial);
     document.documentElement.classList.toggle("dark", initial === "dark");
+    document.documentElement.classList.toggle("midnight", initial === "midnight");
     setMounted(true);
   }, []);
 
@@ -46,10 +47,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setResolvedTheme(next);
     window.localStorage.setItem("theme", next);
     document.documentElement.classList.toggle("dark", next === "dark");
+    document.documentElement.classList.toggle("midnight", next === "midnight");
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    const themes: Theme[] = ["dark", "midnight", "light"];
+    const currentIndex = themes.indexOf(theme);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setTheme(themes[nextIndex]);
   }, [setTheme, theme]);
 
   if (!mounted) {

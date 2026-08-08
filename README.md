@@ -1,10 +1,12 @@
 # Miran — Portfolio
 
-Personal portfolio for **Miran** — AI Engineer focused on secure, production-oriented AI systems (agentic systems, RAG, backend, security).
+Personal portfolio for **Miran** — AI engineer building secure, production-oriented AI systems (RAG, backend infrastructure, retrieval, evaluation, security).
 
 - Site: [muhammadmiran.com](https://muhammadmiran.com)
 - Email: [contact@muhammadmiran.com](mailto:contact@muhammadmiran.com)
 - GitHub: [miransec](https://github.com/miransec)
+
+Featured systems: **AtlasCore** (UI v2) and **VaaniDesk** (v1.0.1).
 
 ## Stack
 
@@ -32,11 +34,10 @@ npm run test:e2e   # requires build + Playwright browsers
 
 ## Placeholders (do not invent)
 
-- LinkedIn URL
 - `public/resume.pdf` (+ set `resume.available` in site config)
 - `public/profile.jpg`
-- Public project repository URLs / demos
-- Real screenshots under `public/projects/*`
+- VaaniDesk public demo URL
+- Real AtlasCore screenshots under `public/projects/atlascore`
 
 ## Deployment
 

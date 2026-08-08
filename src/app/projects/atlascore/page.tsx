@@ -5,18 +5,21 @@ import { AtlasCoreArchitecture } from "@/components/ArchitectureDiagram";
 import {
   CaseStudyMeta,
   CaseStudySection,
+  MetricGrid,
   TagList,
 } from "@/components/CaseStudy";
 import {
   atlascoreCurrentAreas,
-  atlascoreRoadmap,
+  atlascoreMetrics,
+  atlascoreNotShipped,
+  atlascoreUiSurfaces,
   getProjectBySlug,
 } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "AtlasCore",
   description:
-    "AtlasCore case study — secure enterprise AI operations platform with multi-tenancy, PostgreSQL RLS, RBAC, and auditable workflows. In active development.",
+    "Secure enterprise AI infrastructure for multi-tenant knowledge, hybrid retrieval, grounded answering, and database-enforced isolation.",
   alternates: { canonical: "/projects/atlascore" },
 };
 
@@ -38,7 +41,7 @@ export default function AtlasCorePage() {
 
       <header className="mt-8 max-w-2xl">
         <p className="font-mono-ui text-xs tracking-wide text-fg-subtle">
-          <span className="text-accent-fg">02</span>
+          <span className="text-accent-fg">01</span>
           <span className="mx-1.5 text-fg-subtle/60">/</span>
           <span className="uppercase">AtlasCore</span>
           <span className="mx-2 text-fg-subtle/50">·</span>
@@ -52,7 +55,18 @@ export default function AtlasCorePage() {
           rows={[
             { label: "status", value: project.statusShort },
             { label: "role", value: "engineering" },
-            { label: "focus", value: "RLS / identity / authorization / audit" },
+            {
+              label: "focus",
+              value: "FORCE RLS / hybrid retrieval / grounded AI / UI v2",
+            },
+            {
+              label: "tests",
+              value: `${atlascoreMetrics.backendTests.passed} backend · ${atlascoreMetrics.evaluations.passed}/${atlascoreMetrics.evaluations.total} evals`,
+            },
+            {
+              label: "commit",
+              value: `${atlascoreMetrics.latestCommit} — ship AtlasCore UI v2`,
+            },
           ]}
         />
         <p className="mt-6 text-[15px] leading-relaxed text-fg-muted">
@@ -60,22 +74,30 @@ export default function AtlasCorePage() {
         </p>
         <div className="mt-6 rounded-sm border border-border bg-surface p-5">
           <p className="font-mono-ui text-[10px] tracking-wide text-fg-subtle">
-            ~/projects/atlascore
+            atlascore / workspace ui v2
           </p>
           <div className="mt-4 space-y-2 font-mono-ui text-xs text-fg-muted">
-            {project.focus.map((term) => (
-              <p key={term}>
-                <span className="text-accent-fg">→</span> {term}
-              </p>
-            ))}
+            <p>
+              <span className="text-accent-fg">→</span> FORCE RLS + restricted
+              runtime DB role
+            </p>
+            <p>
+              <span className="text-accent-fg">→</span> Hybrid FTS + pgvector +
+              RRF retrieval
+            </p>
+            <p>
+              <span className="text-accent-fg">→</span> Evidence-first Ask AI
+              with abstention
+            </p>
+            <p>
+              <span className="text-accent-fg">→</span> Workspace selector and
+              admin surfaces
+            </p>
           </div>
           <p className="mt-5 font-mono-ui text-[10px] text-fg-subtle">
-            product visual pending · {project.statusShort}
+            product panel · no fabricated screenshots
           </p>
         </div>
-        <p className="mt-4 font-mono-ui text-xs text-fg-subtle">
-          AtlasCore — In active development
-        </p>
         <div className="mt-6 font-mono-ui text-xs text-fg-subtle">
           {project.links.github.href ? (
             <a
@@ -87,124 +109,176 @@ export default function AtlasCorePage() {
               repository →
             </a>
           ) : (
-            <span>repository coming soon</span>
+            <span>repository link not published yet</span>
           )}
         </div>
       </header>
 
       <div className="mt-14 max-w-2xl space-y-12 md:mt-16 md:space-y-14">
-        <CaseStudySection title="Overview">
+        <CaseStudySection title="Summary">
           <p>
-            AtlasCore is a multi-tenant enterprise AI platform designed for
-            secure knowledge access, controlled automation, organizational
-            isolation, and auditable AI workflows. The current focus is
-            foundational security and tenancy primitives rather than a finished
-            end-to-end AI product surface.
+            AtlasCore is a multi-tenant AI platform for organisation knowledge,
+            database-enforced retrieval, and grounded answering. Models operate
+            inside backend, authorization, and evidence boundaries — not as the
+            security boundary themselves.
           </p>
         </CaseStudySection>
 
-        <CaseStudySection title="Enterprise problem">
+        <CaseStudySection title="Problem">
           <p>
-            Enterprise AI systems fail when tenant boundaries are soft, audit
-            trails are incomplete, or agents can act without human-controlled
-            authorization. AtlasCore starts from isolation, authentication,
-            RBAC, and auditability so later intelligence features inherit a
-            trustworthy control plane.
+            Enterprise AI workflows fail when tenant isolation is soft, when
+            retrieval can leak across workspaces, or when models answer without
+            inspectable evidence. Soft prompt instructions are not enough.
+            Isolation, membership, and evidence sufficiency need to be enforced
+            in code and in the database.
           </p>
+        </CaseStudySection>
+
+        <CaseStudySection title="What I built">
+          <p>
+            The current verified surface includes organisations and workspaces,
+            invitations and teams, service accounts and API keys, knowledge
+            ingestion, hybrid retrieval, grounded answering with citations and
+            abstention, audit logging, provider configuration, and a Next.js
+            workspace UI (v2).
+          </p>
+          <TagList items={atlascoreCurrentAreas.slice(0, 18)} />
         </CaseStudySection>
 
         <CaseStudySection title="Architecture">
           <p>
-            Phase 1 centers on application services, tenant isolation via
-            PostgreSQL RLS, authentication hardening, and audit event
-            pipelines. Later intelligence capabilities are intentionally
-            deferred until this foundation is solid.
+            Requests flow through authenticated application services into
+            workspace-scoped operations. Knowledge is ingested, chunked, and
+            embedded; retrieval combines PostgreSQL full-text search with
+            pgvector; answering is gated on evidence sufficiency. Isolation is
+            enforced with FORCE RLS and a restricted runtime database role.
           </p>
           <AtlasCoreArchitecture />
         </CaseStudySection>
 
-        <CaseStudySection title="Multi-tenant design">
+        <CaseStudySection title="Tenant isolation and security">
           <p>
-            Tenancy is modeled around organisation and workspace isolation.
-            Requests are scoped so data access and administrative actions cannot
-            silently cross organisational boundaries.
+            Multi-tenant boundaries are modeled as organisations and workspaces.
+            PostgreSQL Row-Level Security with FORCE RLS is a core isolation
+            mechanism. The runtime database role is restricted. Workspace
+            context fails closed. Organisation and workspace membership are
+            revalidated live — no hardcoded workspace IDs. RBAC, invitations,
+            teams, service accounts, and API keys sit on top of that foundation.
           </p>
         </CaseStudySection>
 
-        <CaseStudySection title="PostgreSQL RLS">
+        <CaseStudySection title="Knowledge ingestion and hybrid retrieval">
           <p>
-            PostgreSQL Row-Level Security, including FORCE RLS, is a core
-            isolation mechanism. Database policy enforcement complements
-            application-level checks rather than replacing careful query and
-            authorization design.
+            Knowledge sources and documents move through an ingestion pipeline
+            with chunking and embeddings. Retrieval combines PostgreSQL
+            full-text search and pgvector similarity, fused with Reciprocal Rank
+            Fusion, so answers can draw from lexical and semantic matches under
+            the same access controls that protect the underlying rows.
           </p>
         </CaseStudySection>
 
-        <CaseStudySection title="Authentication architecture">
+        <CaseStudySection title="Grounded answering">
           <p>
-            Authentication design includes secure session handling with
-            refresh-token families and replay detection. CSRF protection is
-            part of the request security model for browser-facing flows.
+            Ask AI is evidence-first: the system builds evidence packets,
+            gates on sufficiency, abstains when evidence is weak or missing,
+            validates citations, and applies prompt-injection heuristics.
+            Trusted instructions are separated from untrusted retrieved
+            evidence. Providers include a deterministic test provider plus
+            OpenAI, Anthropic, and configurable OpenAI-compatible base URLs.
+            Provider secrets are not logged.
           </p>
         </CaseStudySection>
 
-        <CaseStudySection title="RBAC">
+        <CaseStudySection title="Workspace UI v2">
           <p>
-            Role-based access control governs what operators and services can
-            do within an organisation or workspace. Privileges are intended to
-            be explicit and auditable rather than ambient.
+            UI v2 is a major product/UX iteration: dark engineer-tooling
+            aesthetic, persistent grouped sidebar, workspace selector, command
+            palette, provider status, and polished surfaces for day-to-day
+            workspace work. Users can list and create workspaces, receive
+            administrator membership on create, switch workspace context, and
+            continue into workspace-scoped features without manually entering
+            UUIDs. Ask AI shows citations/evidence and represents abstention or
+            weak-evidence states clearly, including sanitized provider failure
+            states.
+          </p>
+          <p className="font-mono-ui text-xs text-fg-subtle">
+            Surfaces: {atlascoreUiSurfaces.join(" · ")}
+          </p>
+          <p className="text-sm text-fg-subtle">
+            Latest verified UI commit:{" "}
+            <span className="font-mono-ui text-fg-muted">
+              {atlascoreMetrics.latestCommit}
+            </span>{" "}
+            — feat: ship AtlasCore UI v2 and workspace experience. An earlier
+            phase-2d baseline tag still exists separately and does not contain
+            UI v2.
           </p>
         </CaseStudySection>
 
-        <CaseStudySection title="Audit system">
+        <CaseStudySection title="Verification">
           <p>
-            Audit events capture security-relevant actions so operational and
-            administrative activity can be reviewed. This is foundational for
-            enterprise trust and incident investigation.
+            Verification covers backend tests, targeted database/security
+            checks, deterministic evaluations, static analysis, and frontend
+            quality gates. FORCE RLS, the restricted runtime role, and live
+            membership validation remained intact through the UI v2 verification
+            pass.
           </p>
+          <MetricGrid
+            items={[
+              {
+                label: "Backend tests",
+                value: `${atlascoreMetrics.backendTests.passed} passed · ${atlascoreMetrics.backendTests.failed} failed`,
+              },
+              {
+                label: "Targeted DB/security",
+                value: `${atlascoreMetrics.targetedDbSecurityTests.passed} passed`,
+              },
+              {
+                label: "Deterministic evals",
+                value: `${atlascoreMetrics.evaluations.passed}/${atlascoreMetrics.evaluations.total} · ${atlascoreMetrics.evaluations.passRate}`,
+              },
+              {
+                label: "Ruff",
+                value: "clean",
+              },
+              {
+                label: "mypy strict",
+                value: `clean · ${atlascoreMetrics.quality.mypySourceFiles} source files`,
+              },
+              {
+                label: "Frontend",
+                value: "lint + type-check + Vitest + build passed",
+              },
+            ]}
+          />
         </CaseStudySection>
 
-        <CaseStudySection title="Administrative identity roadmap">
+        <CaseStudySection title="Tradeoffs / limitations">
           <p>
-            Administrative identity work continues as part of active
-            development. The portfolio presents this as a roadmap area rather
-            than a completed Phase 2+ capability.
+            The verified surface is an engineering-complete UI v2 platform for
+            knowledge, retrieval, and grounded workflows — not a claim of
+            large-scale production deployment. The following are explicitly not
+            shipped:
           </p>
+          <TagList items={atlascoreNotShipped} />
         </CaseStudySection>
 
-        <CaseStudySection title="Security model">
-          <p>
-            The security model emphasizes defence in depth: RLS and FORCE RLS,
-            RBAC, refresh-token families, replay detection, CSRF protection,
-            and audit logging. Human-controlled architecture remains a design
-            constraint for automation that can affect organisational state.
-          </p>
-          <TagList items={atlascoreCurrentAreas} />
-        </CaseStudySection>
-
-        <CaseStudySection title="Roadmap (not completed)">
-          <p>
-            The following capabilities are planned after Phase 1 foundations.
-            They are not claimed as finished functionality:
-          </p>
-          <TagList items={atlascoreRoadmap} />
-        </CaseStudySection>
-
-        <CaseStudySection title="Development status">
-          <p>
-            <strong className="font-medium text-fg">
-              Status: In active development.
-            </strong>{" "}
-            Phase 1A and Phase 1B engineering cover tenancy and security
-            foundations. Some Phase 1A runtime verification remains
-            environment-dependent and is validated in the project&apos;s own
-            development and CI contexts rather than claimed as a universal
-            production deployment state.
-          </p>
-        </CaseStudySection>
-
-        <CaseStudySection title="Technology">
+        <CaseStudySection title="Stack">
           <TagList items={project.technologies} />
+        </CaseStudySection>
+
+        <CaseStudySection title="Repository">
+          <p>
+            Public repository:{" "}
+            <a
+              href="https://github.com/miransec/atlascore"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent-fg transition-colors duration-200 hover:underline"
+            >
+              github.com/miransec/atlascore
+            </a>
+          </p>
         </CaseStudySection>
       </div>
     </article>

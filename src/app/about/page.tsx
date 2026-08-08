@@ -7,7 +7,7 @@ import { siteConfig } from "@/data/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About Miran — AI engineer focused on systems where models work inside reliable engineering boundaries.",
+    "About Miran — AI engineer focused on systems where models work inside reliable backend and security boundaries.",
   alternates: { canonical: "/about" },
 };
 
@@ -22,21 +22,24 @@ export default function AboutPage() {
             {siteConfig.name}
           </h1>
           <p className="mt-1 font-mono-ui text-xs text-fg-subtle">
-            AI / systems / security
+            AI engineering · secure systems
           </p>
         </div>
       </div>
 
       <div className="mt-10 max-w-xl space-y-4 text-[15px] leading-relaxed text-fg-muted">
         <p>
-          I am an AI/software engineer focused on building systems where AI
-          models work inside reliable engineering boundaries.
+          I&apos;m an AI engineer focused on building systems that combine model
+          capability with strong backend and security boundaries.
         </p>
         <p>{siteConfig.aboutBlurb}</p>
         <p>
-          Interests include agentic systems, retrieval-augmented generation,
-          backend engineering, AI security, evaluation, multi-tenant systems,
-          and observability.
+          I&apos;m especially interested in the intersection of AI engineering
+          and cybersecurity.
+        </p>
+        <p>
+          I&apos;m currently looking for internship opportunities where I can
+          contribute to real AI systems and keep developing as an engineer.
         </p>
       </div>
 
@@ -60,13 +63,31 @@ export default function AboutPage() {
         </dl>
       </section>
 
-      <p className="mt-12 font-mono-ui text-xs text-fg-subtle">
+      <p className="mt-12 space-y-2 font-mono-ui text-xs text-fg-subtle">
         <a
           href={siteConfig.email.href}
-          className="text-accent-fg hover:underline"
+          className="block text-accent-fg hover:underline"
         >
           {siteConfig.email.address}
         </a>
+        <a
+          href={siteConfig.github.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block hover:text-fg"
+        >
+          GitHub →
+        </a>
+        {siteConfig.linkedin.href ? (
+          <a
+            href={siteConfig.linkedin.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block hover:text-fg"
+          >
+            LinkedIn →
+          </a>
+        ) : null}
       </p>
     </div>
   );

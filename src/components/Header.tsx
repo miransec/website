@@ -71,6 +71,17 @@ export function Header() {
           >
             github
           </a>
+          {siteConfig.linkedin.href ? (
+            <a
+              href={siteConfig.linkedin.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden font-mono-ui px-2 py-1 text-[13px] text-fg-subtle transition-colors duration-200 hover:text-fg sm:inline-flex"
+              aria-label="LinkedIn"
+            >
+              linkedin
+            </a>
+          ) : null}
           <ThemeToggle />
           <button
             type="button"
@@ -137,6 +148,16 @@ export function Header() {
             >
               github
             </a>
+            {siteConfig.linkedin.href ? (
+              <a
+                href={siteConfig.linkedin.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono-ui rounded px-2 py-2.5 text-sm text-fg-muted hover:text-fg"
+              >
+                linkedin
+              </a>
+            ) : null}
           </nav>
         </div>
       ) : null}

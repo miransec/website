@@ -1,11 +1,11 @@
+import Link from "next/link";
 import { SystemCard } from "@/components/SystemCard";
-import { getFeaturedProjects, vaanideskMetrics } from "@/data/projects";
+import { HeroTagline } from "@/components/HeroTagline";
+import { getFeaturedProjects } from "@/data/projects";
 import { siteConfig } from "@/data/site";
 
 export default function HomePage() {
   const featured = getFeaturedProjects();
-  const vaanidesk = featured.find((p) => p.slug === "vaanidesk");
-  const atlascore = featured.find((p) => p.slug === "atlascore");
 
   return (
     <div className="container-wide py-10 md:py-14">
@@ -13,8 +13,45 @@ export default function HomePage() {
         <h1 className="font-display text-[2.75rem] font-bold leading-[0.95] tracking-[-0.03em] text-fg md:text-6xl md:leading-[0.92]">
           {siteConfig.name}
         </h1>
-        <p className="fade-in-up mt-5 max-w-md text-[15px] leading-relaxed text-fg-muted md:text-base">
-          {siteConfig.tagline}
+        <p className="fade-in-up mt-5 max-w-lg text-[15px] leading-relaxed text-fg-muted md:text-base">
+          <HeroTagline
+            base="AI engineer building "
+            lines={[
+              "secure, intelligent systems.",
+              "production-grade RAG pipelines.",
+              "database-enforced AI isolation.",
+              "grounded generation with citations.",
+              "evaluation as a release gate.",
+            ]}
+          />
+        </p>
+        <p className="fade-in-up mt-3 max-w-lg text-[14px] leading-relaxed text-fg-subtle md:text-[15px]">
+          {siteConfig.summary}
+        </p>
+        <div className="fade-in-up mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 font-mono-ui text-sm">
+          <Link
+            href="/projects"
+            className="text-accent-fg transition-colors duration-200 hover:underline"
+          >
+            View work
+          </Link>
+          <a
+            href={siteConfig.github.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-fg-subtle transition-colors duration-200 hover:text-fg"
+          >
+            GitHub
+          </a>
+          <Link
+            href="/contact"
+            className="text-fg-subtle transition-colors duration-200 hover:text-fg"
+          >
+            Contact
+          </Link>
+        </div>
+        <p className="fade-in-up mt-5 font-mono-ui text-[11px] text-fg-subtle">
+          {siteConfig.availability}
         </p>
       </section>
 
@@ -29,28 +66,36 @@ export default function HomePage() {
         </div>
 
         <div className="mt-5 grid gap-4 md:mt-6 md:grid-cols-2 md:gap-5">
-          {vaanidesk ? (
-            <SystemCard
-              index="01"
-              project={vaanidesk}
-              metrics={[
-                `${vaanideskMetrics.backendTests.passed} tests`,
-                `${vaanideskMetrics.evaluations.passed} evaluations`,
-                `${vaanideskMetrics.e2e.playwrightPassed} browser E2E`,
-              ]}
-              image={{
-                src: "/projects/vaanidesk/home.png",
-                alt: "VaaniDesk product homepage",
-              }}
-            />
-          ) : null}
-          {atlascore ? (
-            <SystemCard
-              index="02"
-              project={atlascore}
-              placeholderLabel="~/projects/atlascore"
-            />
-          ) : null}
+          {featured.map((project, i) => {
+            const index = String(i + 1).padStart(2, "0");
+            if (project.slug === "vaanidesk") {
+              return (
+                <SystemCard
+                  key={project.slug}
+                  index={index}
+                  project={project}
+                  image={{
+                    src: "/projects/vaanidesk/home.png",
+                    alt: "VaaniDesk product homepage",
+                  }}
+                />
+              );
+            }
+            return (
+              <SystemCard
+                key={project.slug}
+                index={index}
+                project={project}
+                placeholderLabel="atlascore / workspace ui v2"
+                panelItems={[
+                  "FORCE RLS + restricted DB role",
+                  "Hybrid FTS + pgvector retrieval",
+                  "Evidence-first Ask AI",
+                  "Workspace selector + admin surfaces",
+                ]}
+              />
+            );
+          })}
         </div>
       </section>
 
@@ -65,7 +110,7 @@ export default function HomePage() {
           currently
         </h2>
         <p className="mt-3 font-mono-ui text-sm text-fg-muted">
-          AI systems → AI security
+          {siteConfig.currently}
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
           <a
@@ -74,14 +119,26 @@ export default function HomePage() {
           >
             {siteConfig.email.address}
           </a>
-          <a
-            href={siteConfig.github.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono-ui text-sm text-fg-subtle transition-colors duration-200 hover:text-fg"
-          >
-            GitHub ↗
-          </a>
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              href={siteConfig.github.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono-ui text-sm text-fg-subtle transition-colors duration-200 hover:text-fg"
+            >
+              GitHub ↗
+            </a>
+            {siteConfig.linkedin.href ? (
+              <a
+                href={siteConfig.linkedin.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono-ui text-sm text-fg-subtle transition-colors duration-200 hover:text-fg"
+              >
+                LinkedIn ↗
+              </a>
+            ) : null}
+          </div>
         </div>
       </section>
     </div>

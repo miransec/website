@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import { existsSync } from "fs";
 import path from "path";
 import {
+  atlascoreMetrics,
+  atlascoreNotShipped,
   getFeaturedProjects,
   getProjectBySlug,
   projects,
@@ -12,10 +14,10 @@ import {
 import { navLinks, siteConfig } from "@/data/site";
 
 describe("project data integrity", () => {
-  it("features VaaniDesk before AtlasCore", () => {
+  it("features AtlasCore before VaaniDesk", () => {
     expect(getFeaturedProjects().map((p) => p.slug)).toEqual([
-      "vaanidesk",
       "atlascore",
+      "vaanidesk",
     ]);
   });
 
@@ -29,12 +31,14 @@ describe("project data integrity", () => {
       expect(project.techLine.length).toBeGreaterThan(0);
       expect(project.techLine.length).toBeLessThanOrEqual(5);
       expect(project.statusShort.length).toBeGreaterThan(0);
+      expect(project.proofLine.length).toBeGreaterThan(0);
     }
   });
 
   it("resolves projects by slug", () => {
     expect(getProjectBySlug("vaanidesk")?.title).toBe("VaaniDesk");
-    expect(getProjectBySlug("atlascore")?.status).toBe("in-development");
+    expect(getProjectBySlug("atlascore")?.statusShort).toBe("UI v2");
+    expect(getProjectBySlug("atlascore")?.status).toBe("engineering-complete");
     expect(getProjectBySlug("missing")).toBeUndefined();
   });
 
@@ -48,6 +52,16 @@ describe("project data integrity", () => {
     expect(vaanideskMetrics.e2e.playwrightPassed).toBe(14);
   });
 
+  it("keeps verified AtlasCore UI v2 metrics coherent", () => {
+    expect(atlascoreMetrics.backendTests.passed).toBe(717);
+    expect(atlascoreMetrics.backendTests.failed).toBe(0);
+    expect(atlascoreMetrics.evaluations.passed).toBe(46);
+    expect(atlascoreMetrics.evaluations.total).toBe(46);
+    expect(atlascoreMetrics.targetedDbSecurityTests.passed).toBe(216);
+    expect(atlascoreMetrics.quality.mypySourceFiles).toBe(90);
+    expect(atlascoreMetrics.latestCommit).toBe("9d62e33");
+  });
+
   it("does not claim MCP or vision as VaaniDesk areas", () => {
     const areas = vaanideskAreas.map((a) => a.toLowerCase());
     expect(areas.some((a) => a.includes("mcp"))).toBe(false);
@@ -55,13 +69,24 @@ describe("project data integrity", () => {
     expect(areas.some((a) => a === "multimodal support")).toBe(false);
   });
 
-  it("links VaaniDesk to the public miransec repository and keeps AtlasCore honest", () => {
+  it("does not claim MCP or Gemini as AtlasCore shipped work", () => {
+    const notShipped = atlascoreNotShipped.map((a) => a.toLowerCase());
+    expect(notShipped.some((a) => a.includes("mcp"))).toBe(true);
+    expect(notShipped.some((a) => a.includes("gemini"))).toBe(true);
+    const atlascore = getProjectBySlug("atlascore");
+    expect(atlascore?.highlights.join(" ").toLowerCase()).not.toMatch(/\bmcp\b/);
+    expect(atlascore?.highlights.join(" ").toLowerCase()).not.toMatch(/gemini/);
+  });
+
+  it("links VaaniDesk and AtlasCore to public miransec repositories", () => {
     const vaanidesk = getProjectBySlug("vaanidesk");
     const atlascore = getProjectBySlug("atlascore");
     expect(vaanidesk?.links.github.href).toBe(
       "https://github.com/miransec/vaanidesk",
     );
-    expect(atlascore?.links.github.href).toBeNull();
+    expect(atlascore?.links.github.href).toBe(
+      "https://github.com/miransec/atlascore",
+    );
     expect(vaanidesk?.links.demo?.href ?? null).toBeNull();
   });
 
@@ -105,8 +130,19 @@ describe("navigation and critical links", () => {
     expect(siteConfig.email.href).toBe("mailto:contact@muhammadmiran.com");
   });
 
-  it("keeps LinkedIn as an explicit placeholder", () => {
-    expect(siteConfig.linkedin.href).toBeNull();
+  it("points LinkedIn at the public profile", () => {
+    expect(siteConfig.linkedin.href).toBe(
+      "https://www.linkedin.com/in/muhammad-miran-3672a242",
+    );
+    expect(siteConfig.linkedin.placeholder).toBe(false);
+  });
+
+  it("uses current positioning copy", () => {
+    expect(siteConfig.tagline).toBe(
+      "AI engineer building secure, intelligent systems.",
+    );
+    expect(siteConfig.summary).toContain("authorization");
+    expect(siteConfig.availability).toContain("internships");
   });
 });
 

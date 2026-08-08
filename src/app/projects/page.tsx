@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
 import { SystemCard } from "@/components/SystemCard";
-import {
-  getFeaturedProjects,
-  projects,
-  vaanideskMetrics,
-} from "@/data/projects";
+import { getFeaturedProjects, projects } from "@/data/projects";
 
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Selected engineering work including VaaniDesk and AtlasCore.",
+    "Selected engineering work including AtlasCore and VaaniDesk.",
   alternates: { canonical: "/projects" },
 };
 
@@ -34,11 +30,6 @@ export default function ProjectsPage() {
                 key={project.slug}
                 index={index}
                 project={project}
-                metrics={[
-                  `${vaanideskMetrics.backendTests.passed} tests`,
-                  `${vaanideskMetrics.evaluations.passed} evaluations`,
-                  `${vaanideskMetrics.e2e.playwrightPassed} browser E2E`,
-                ]}
                 image={{
                   src: "/projects/vaanidesk/home.png",
                   alt: "VaaniDesk product homepage",
@@ -51,7 +42,13 @@ export default function ProjectsPage() {
               key={project.slug}
               index={index}
               project={project}
-              placeholderLabel="~/projects/atlascore"
+              placeholderLabel="atlascore / workspace ui v2"
+              panelItems={[
+                "FORCE RLS + restricted DB role",
+                "Hybrid FTS + pgvector retrieval",
+                "Evidence-first Ask AI",
+                "Workspace selector + admin surfaces",
+              ]}
             />
           );
         })}

@@ -6,9 +6,11 @@ type SystemCardProps = {
   index: string;
   project: Project;
   image?: { src: string; alt: string };
+  /** Override proof lines; defaults to project.proofLine */
   metrics?: string[];
   /** Typography-only visual when no product screenshot exists */
   placeholderLabel?: string;
+  panelItems?: string[];
 };
 
 export function SystemCard({
@@ -17,13 +19,16 @@ export function SystemCard({
   image,
   metrics,
   placeholderLabel,
+  panelItems,
 }: SystemCardProps) {
   const href = project.links.caseStudy.href ?? `/projects/${project.slug}`;
+  const proof = metrics ?? [project.proofLine];
+  const panel = panelItems ?? project.focus;
 
   return (
     <Link
       href={href}
-      className="group flex h-full flex-col overflow-hidden rounded-[2px] border border-border bg-surface transition-[border-color,background-color] duration-200 hover:border-border-strong hover:bg-surface-hover"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[2px] border border-border bg-surface transition-[border-color,background-color,box-shadow] duration-300 hover:border-border-strong hover:bg-surface-hover hover:shadow-[0_0_0_1px_var(--color-accent-muted),0_8px_32px_rgba(0,0,0,0.15)] md:hover:shadow-[0_0_0_1px_var(--color-accent-muted),0_12px_40px_rgba(0,0,0,0.2)]"
     >
       <div className="flex flex-1 flex-col p-5 md:p-6">
         <div className="flex items-baseline justify-between gap-3">
@@ -47,9 +52,9 @@ export function SystemCard({
           {project.focus.join(" · ")}
         </p>
 
-        {metrics && metrics.length > 0 ? (
+        {proof.length > 0 ? (
           <ul className="mt-5 space-y-1 font-mono-ui text-[11px] text-fg-muted">
-            {metrics.map((line) => (
+            {proof.map((line) => (
               <li key={line}>{line}</li>
             ))}
           </ul>
@@ -75,14 +80,14 @@ export function SystemCard({
                 {placeholderLabel ?? "engineering surface"}
               </p>
               <div className="space-y-2 font-mono-ui text-[11px] leading-relaxed text-fg-muted">
-                {project.focus.map((term) => (
+                {panel.map((term) => (
                   <p key={term}>
                     <span className="text-accent-fg">→</span> {term}
                   </p>
                 ))}
               </div>
               <p className="font-mono-ui text-[10px] text-fg-subtle">
-                visual pending · {project.statusShort}
+                product panel · {project.statusShort}
               </p>
             </div>
           )}

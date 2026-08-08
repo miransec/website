@@ -19,7 +19,7 @@ import {
 export const metadata: Metadata = {
   title: "VaaniDesk",
   description:
-    "VaaniDesk case study — multilingual AI customer support with controlled agent workflows, hybrid RAG, citations, evaluations, and security controls.",
+    "Multilingual AI customer support platform with controlled actions, hybrid RAG, citations, and secure customer workflows.",
   alternates: { canonical: "/projects/vaanidesk" },
 };
 
@@ -50,7 +50,7 @@ export default function VaaniDeskPage() {
 
       <header className="mt-8 max-w-2xl">
         <p className="font-mono-ui text-xs tracking-wide text-fg-subtle">
-          <span className="text-accent-fg">01</span>
+          <span className="text-accent-fg">02</span>
           <span className="mx-1.5 text-fg-subtle/60">/</span>
           <span className="uppercase">VaaniDesk</span>
           <span className="mx-2 text-fg-subtle/50">·</span>

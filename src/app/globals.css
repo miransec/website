@@ -43,6 +43,25 @@
   --guide: rgba(18, 16, 14, 0.035);
 }
 
+/* Midnight: warm dim — easier on eyes in low light */
+.midnight {
+  --canvas: #0d0c0a;
+  --canvas-elevated: #141210;
+  --surface: #181512;
+  --surface-hover: #1f1b17;
+  --border: #2d2822;
+  --border-strong: #403a30;
+  --fg: #e8dfcf;
+  --fg-muted: #a89d8a;
+  --fg-subtle: #7a7060;
+  --cream: #e8dfcf;
+  --accent: #b8a88a;
+  --accent-fg: #c8b898;
+  --accent-muted: #1e1a16;
+  --focus-ring: #c8b898;
+  --guide: rgba(232, 223, 207, 0.018);
+}
+
 /* Dark: warm black + dusty cream type — coder, not neon */
 .dark {
   --canvas: #0a0908;
@@ -107,6 +126,21 @@
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  /* Smooth color transitions for interactive elements */
+  button,
+  a,
+  [class*="transition-colors"] {
+    transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    button,
+    a,
+    [class*="transition-colors"] {
+      transition: none;
+    }
   }
 }
 

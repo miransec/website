@@ -72,28 +72,40 @@ export function VaaniDeskArchitecture() {
 export function AtlasCoreArchitecture() {
   const layers = [
     {
-      title: "Administrative & operator surfaces",
-      items: ["Org administration", "Workspace controls", "Human approval paths"],
+      title: "Workspace UI v2",
+      items: [
+        "Grouped sidebar",
+        "Workspace selector",
+        "Ask AI + citations",
+        "Org / workspace admin",
+      ],
     },
     {
       title: "Application services",
-      items: ["FastAPI", "Auth service", "RBAC", "Audit event pipeline"],
+      items: [
+        "FastAPI",
+        "Auth + RBAC",
+        "Ingestion + retrieval",
+        "Grounded answering",
+        "Audit + observability",
+      ],
     },
     {
       title: "Tenant isolation",
       items: [
-        "Organisation boundaries",
-        "Workspace isolation",
+        "Organisations / workspaces",
+        "Live membership revalidation",
         "PostgreSQL RLS + FORCE RLS",
+        "Restricted runtime DB role",
       ],
     },
     {
-      title: "Security primitives",
+      title: "Knowledge & retrieval",
       items: [
-        "Refresh-token families",
-        "Replay detection",
-        "CSRF protection",
-        "Secret management",
+        "Sources + documents",
+        "Chunking + embeddings",
+        "FTS + pgvector hybrid",
+        "Reciprocal Rank Fusion",
       ],
     },
   ];
@@ -102,10 +114,10 @@ export function AtlasCoreArchitecture() {
     <div
       className="rounded-lg border border-border bg-surface p-4 md:p-6"
       role="img"
-      aria-label="AtlasCore architecture: admin surfaces, application services, tenant isolation, and security primitives"
+      aria-label="AtlasCore architecture: workspace UI, application services, tenant isolation, and knowledge retrieval"
     >
       <p className="mb-4 text-xs uppercase tracking-wide text-fg-subtle">
-        Architecture overview — Phase 1 focus
+        Architecture overview — UI v2
       </p>
       <div className="grid gap-3">
         {layers.map((layer, index) => (
@@ -135,9 +147,9 @@ export function AtlasCoreArchitecture() {
         ))}
       </div>
       <p className="mt-4 text-xs leading-relaxed text-fg-subtle">
-        Roadmap (not completed): RAG, agent workflows, MCP, and enterprise
-        analytics may follow once the security and tenancy foundations are
-        stable.
+        Not shipped: MCP, safe analytics SQL, workflow engine, tool registry,
+        human approval gates, Gemini integration, or large-scale production
+        deployment claims.
       </p>
     </div>
   );

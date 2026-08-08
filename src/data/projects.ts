@@ -24,6 +24,8 @@ export type Project = {
   focus: string[];
   /** Compact tech line for list views */
   techLine: string[];
+  /** Understated proof line for cards */
+  proofLine: string;
   featured: boolean;
   technologies: string[];
   highlights: string[];
@@ -35,22 +37,75 @@ export type Project = {
   screenshotDir: string;
 };
 
-const FEATURED_ORDER = ["vaanidesk", "atlascore"] as const;
+const FEATURED_ORDER = ["atlascore", "vaanidesk"] as const;
 
 export const projects: Project[] = [
   {
+    slug: "atlascore",
+    title: "AtlasCore",
+    subtitle:
+      "Secure enterprise AI infrastructure for knowledge, retrieval, and grounded AI workflows.",
+    shortDescription:
+      "A multi-tenant AI platform for ingesting organisation knowledge, retrieving it under database-enforced access control, and answering questions only from retrieved evidence.",
+    description:
+      "A multi-tenant AI platform for ingesting organisation knowledge, retrieving it under database-enforced access control, and answering questions only from retrieved evidence. Security is enforced in code and database boundaries rather than delegated to model prompts.",
+    status: "engineering-complete",
+    statusLabel: "UI v2 — verified engineering surface",
+    statusShort: "UI v2",
+    focus: ["FORCE RLS", "Hybrid retrieval", "Grounded AI", "Workspace UI"],
+    techLine: ["PostgreSQL RLS", "pgvector", "FastAPI", "Next.js"],
+    proofLine:
+      "717 backend tests · 46/46 evals · FORCE RLS · pgvector · UI v2",
+    featured: true,
+    technologies: [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "FORCE RLS",
+      "pgvector",
+      "Redis",
+      "Next.js",
+      "TypeScript",
+      "OpenTelemetry",
+      "pytest",
+      "Vitest",
+    ],
+    highlights: [
+      "717 backend tests passed · 0 failed",
+      "46/46 deterministic evaluation cases · 100% pass rate",
+      "FORCE RLS · restricted runtime DB role · live membership revalidation",
+      "Hybrid FTS + pgvector retrieval with Reciprocal Rank Fusion",
+      "Evidence-first answering with citation validation and abstention",
+      "Workspace UI v2 with org/workspace management surfaces",
+    ],
+    links: {
+      caseStudy: {
+        label: "View Case Study",
+        href: "/projects/atlascore",
+      },
+      github: {
+        label: "GitHub",
+        href: "https://github.com/miransec/atlascore",
+        external: true,
+      },
+    },
+    screenshotDir: "/projects/atlascore",
+  },
+  {
     slug: "vaanidesk",
     title: "VaaniDesk",
-    subtitle: "Multilingual AI customer support",
+    subtitle: "Multilingual AI Customer Support Platform",
     shortDescription:
-      "Production-oriented multilingual AI support with controlled agent workflows, hybrid retrieval, evaluations, and security controls.",
+      "Multilingual AI customer support with controlled actions and hybrid RAG.",
     description:
-      "A production-oriented multilingual AI support system combining controlled agent workflows, real business tools, hybrid retrieval, source citations, evaluation, and security controls.",
+      "A production-oriented customer support system for multilingual conversations, controlled business actions, access-controlled knowledge retrieval, and secure customer workflows.",
     status: "engineering-complete",
     statusLabel: "v1.0.1 — Engineering complete / portfolio release preparation",
     statusShort: "v1.0.1",
     focus: ["Agents", "RAG", "Security", "Evaluation"],
     techLine: ["FastAPI", "PostgreSQL", "RAG", "Next.js"],
+    proofLine:
+      "206 backend tests · 113 evals · 40 security tests · 14 E2E",
     featured: true,
     technologies: [
       "Python",
@@ -87,47 +142,6 @@ export const projects: Project[] = [
       },
     },
     screenshotDir: "/projects/vaanidesk",
-  },
-  {
-    slug: "atlascore",
-    title: "AtlasCore",
-    subtitle: "Secure enterprise AI infrastructure",
-    shortDescription:
-      "Multi-tenant enterprise AI platform focused on secure tenancy, authentication, RBAC, and auditable operations — in active development.",
-    description:
-      "A multi-tenant enterprise AI platform designed for secure knowledge access, controlled automation, organizational isolation and auditable AI workflows. Phase 1 engineering prioritizes tenancy and security foundations.",
-    status: "in-development",
-    statusLabel: "In active development",
-    statusShort: "building",
-    focus: ["RLS", "Identity", "Authorization", "Audit"],
-    techLine: ["PostgreSQL RLS", "RBAC", "FastAPI", "Redis"],
-    featured: true,
-    technologies: [
-      "Python",
-      "FastAPI",
-      "PostgreSQL",
-      "RLS",
-      "Redis",
-      "Docker",
-    ],
-    highlights: [
-      "PostgreSQL Row-Level Security with FORCE RLS",
-      "Organisation / workspace isolation",
-      "Refresh-token families with replay detection",
-      "RBAC, CSRF protection, and audit events",
-    ],
-    links: {
-      caseStudy: {
-        label: "View Case Study",
-        href: "/projects/atlascore",
-      },
-      github: {
-        label: "Repository",
-        href: null,
-        comingSoon: true,
-      },
-    },
-    screenshotDir: "/projects/atlascore",
   },
 ];
 
@@ -186,36 +200,110 @@ export const vaanideskLimitations = [
   "An MCP server and a dedicated vision / image-analysis pipeline are not part of the shipped v1.0.1 surface.",
 ] as const;
 
+export const atlascoreMetrics = {
+  uiVersion: "UI v2",
+  latestCommit: "9d62e33",
+  backendTests: { passed: 717, failed: 0 },
+  targetedDbSecurityTests: { passed: 216 },
+  evaluations: {
+    passed: 46,
+    total: 46,
+    passRate: "100%",
+  },
+  quality: {
+    ruffClean: true,
+    mypyStrictClean: true,
+    mypySourceFiles: 90,
+    frontendLint: true,
+    frontendTypecheck: true,
+    frontendVitest: true,
+    frontendBuild: true,
+    migrationsApplied: true,
+    forceRlsPreserved: true,
+    restrictedDbRolePreserved: true,
+    liveOrgMembershipValidation: true,
+    liveWorkspaceMembershipValidation: true,
+    noHardcodedWorkspaceIds: true,
+    noProviderSecretsLogged: true,
+    noProductionSecretsCommitted: true,
+  },
+} as const;
+
 export const atlascoreCurrentAreas = [
+  "organisations and workspaces",
+  "multi-tenant architecture",
   "PostgreSQL Row-Level Security",
   "FORCE RLS",
-  "multi-tenancy",
-  "organisation/workspace isolation",
+  "restricted runtime database role",
   "RBAC",
   "secure authentication",
-  "refresh-token families",
-  "replay detection",
-  "CSRF protection",
-  "audit events",
-  "human-controlled architecture",
+  "workspace membership validation",
+  "invitations",
+  "teams",
+  "service accounts",
+  "API keys",
+  "knowledge sources and documents",
+  "ingestion pipeline",
+  "chunking",
+  "embeddings",
+  "PostgreSQL full-text search",
+  "pgvector",
+  "hybrid retrieval",
+  "Reciprocal Rank Fusion",
+  "grounded answering",
+  "evidence packets",
+  "evidence sufficiency gating",
+  "abstention on weak/no evidence",
+  "citation validation",
+  "prompt-injection heuristics",
+  "trusted instructions vs untrusted evidence",
+  "deterministic test provider",
+  "OpenAI provider",
+  "Anthropic provider",
+  "OpenAI-compatible base URL support",
+  "audit logging",
+  "structured logging",
+  "OpenTelemetry-oriented configuration",
+  "health/readiness endpoints",
+  "Next.js workspace UI v2",
 ] as const;
 
-/** Explicitly labelled future work — not completed functionality. */
-export const atlascoreRoadmap = [
-  "RAG",
-  "agent workflows",
+/** Explicitly not claimed as shipped. */
+export const atlascoreNotShipped = [
   "MCP",
-  "enterprise analytics",
+  "safe analytics SQL",
+  "workflow engine",
+  "tool registry",
+  "human approval gates",
+  "Gemini integration",
+  "large-scale production deployment",
+] as const;
+
+export const atlascoreUiSurfaces = [
+  "dashboard",
+  "workspaces",
+  "knowledge sources",
+  "documents",
+  "search",
+  "Ask AI",
+  "members",
+  "teams",
+  "API keys",
+  "service accounts",
+  "audit",
+  "organisation settings",
+  "AI provider settings",
+  "preferences",
 ] as const;
 
 export const skillCategories = [
   {
     title: "AI",
-    skills: ["Python", "agents", "RAG", "evaluation"],
+    skills: ["Python", "RAG", "grounded generation", "evaluation"],
   },
   {
     title: "Systems",
-    skills: ["FastAPI", "PostgreSQL", "Redis", "Docker"],
+    skills: ["FastAPI", "PostgreSQL", "pgvector", "Redis", "Docker"],
   },
   {
     title: "Security",
@@ -231,6 +319,6 @@ export const plannedWriting = [
   "Building tenant isolation with PostgreSQL RLS",
   "Designing safe tool execution for AI agents",
   "Hybrid retrieval in production RAG",
-  "Human approval for destructive AI actions",
+  "Evidence-first answering and abstention",
   "Evaluating multilingual AI systems",
 ] as const;

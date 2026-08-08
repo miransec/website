@@ -15,7 +15,8 @@ export default function ContactPage() {
         Contact
       </h1>
       <p className="mt-4 max-w-md text-[15px] leading-relaxed text-fg-muted">
-        Have something interesting to build or discuss?
+        For internship and engineering conversations related to AI systems,
+        backend work, and secure AI systems.
       </p>
 
       <a

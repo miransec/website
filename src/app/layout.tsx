@@ -3,6 +3,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AmbientBackground } from "@/components/AmbientBackground";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
 
@@ -90,6 +91,7 @@ export default function RootLayout({
         className={`${sans.variable} ${mono.variable} ${display.variable} flex min-h-screen flex-col font-sans antialiased`}
       >
         <ThemeProvider>
+          <AmbientBackground />
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-surface focus:px-3 focus:py-2 focus:text-sm focus:shadow"
