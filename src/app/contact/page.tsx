@@ -10,13 +10,15 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="container-page py-14 md:py-20">
-      <p className="section-label">03 / contact</p>
-      <h1 className="mt-6 font-display text-3xl font-bold tracking-[-0.03em] text-fg md:text-4xl">
-        Contact
+      <p className="eyebrow-line font-mono-ui text-[11px] tracking-[0.12em] uppercase text-accent-fg mb-6 flex items-center">
+        contact
+      </p>
+      <h1 className="font-display text-3xl font-bold tracking-[-0.03em] text-fg md:text-4xl">
+        Get in touch
       </h1>
       <p className="mt-4 max-w-md text-[15px] leading-relaxed text-fg-muted">
         For internship and engineering conversations related to AI systems,
-        backend work, and secure AI systems.
+        backend work, and secure infrastructure.
       </p>
 
       <a
@@ -26,34 +28,37 @@ export default function ContactPage() {
         {siteConfig.email.address}
       </a>
 
-      <ul className="mt-10 space-y-3 font-mono-ui text-sm text-fg-muted">
-        <li>
-          <span className="text-fg-subtle">GitHub</span>
-          <span className="mx-2 text-fg-subtle" aria-hidden="true">
-            /
-          </span>
+      <div className="mt-12 flex items-center gap-3 border-b border-border pb-3 mb-6">
+        <span className="section-accent-bar" aria-hidden="true" />
+        <span className="font-mono-ui text-[10px] tracking-[0.14em] uppercase text-fg-subtle">
+          elsewhere
+        </span>
+      </div>
+
+      <ul className="space-y-4 font-mono-ui text-sm text-fg-muted">
+        <li className="flex items-center gap-3">
+          <span className="text-fg-subtle w-16">GitHub</span>
+          <span className="text-fg-subtle/40">/</span>
           <a
             href={siteConfig.github.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-fg"
+            className="hover:text-fg transition-colors duration-200"
           >
-            miransec
+            miransec ↗
           </a>
         </li>
-        <li>
-          <span className="text-fg-subtle">LinkedIn</span>
-          <span className="mx-2 text-fg-subtle" aria-hidden="true">
-            /
-          </span>
+        <li className="flex items-center gap-3">
+          <span className="text-fg-subtle w-16">LinkedIn</span>
+          <span className="text-fg-subtle/40">/</span>
           {siteConfig.linkedin.href ? (
             <a
               href={siteConfig.linkedin.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-fg"
+              className="hover:text-fg transition-colors duration-200"
             >
-              LinkedIn
+              miransec ↗
             </a>
           ) : (
             <span className="text-fg-subtle">coming soon</span>
@@ -62,8 +67,7 @@ export default function ContactPage() {
       </ul>
 
       <p className="mt-12 max-w-md text-xs leading-relaxed text-fg-subtle">
-        Direct email is the preferred contact method. A web form will be wired
-        later when SMTP delivery is configured.
+        Direct email is the preferred contact method. Response within 24–48 hours.
       </p>
     </div>
   );

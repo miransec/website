@@ -9,17 +9,33 @@ import { averqenScreenshotSrc } from "@/lib/averqen-screenshots";
 export default function HomePage() {
   const featured = getFeaturedProjects();
   const atlasDashboard = atlascoreScreenshotSrc("dashboard.png");
-  const averqenDetail = averqenScreenshotSrc("incident-detail.png");
-  const averqenDashboard = averqenScreenshotSrc("dashboard.png");
-  const averqenHeroImage = averqenDetail ?? averqenDashboard;
+  const averqenHeroImage = averqenScreenshotSrc("dashboard.png");
 
   return (
-    <div className="container-wide py-10 md:py-14">
+    <div className="container-wide py-12 md:py-16">
+      {/* ── HERO ── */}
       <section className="fade-in max-w-2xl">
-        <h1 className="font-display text-[2.75rem] font-bold leading-[0.95] tracking-[-0.03em] text-fg md:text-6xl md:leading-[0.92]">
+        {/* Eyebrow */}
+        <p className="eyebrow-line font-mono-ui text-[11px] tracking-[0.12em] uppercase text-accent-fg mb-5 flex items-center">
+          AI engineer · secure systems
+        </p>
+
+        {/* Name — gradient */}
+        <h1
+          className="font-display font-bold leading-[0.92] tracking-[-0.03em]"
+          style={{
+            fontSize: "clamp(52px, 8vw, 88px)",
+            background: "linear-gradient(135deg, #ffffff 0%, #e8e8e8 40%, #a8c8e8 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
           {siteConfig.name}
         </h1>
-        <p className="fade-in-up mt-5 max-w-lg text-[15px] leading-relaxed text-fg-muted md:text-base">
+
+        {/* Tagline */}
+        <p className="fade-in-up mt-6 max-w-lg text-[15px] leading-relaxed text-fg-muted md:text-base">
           <HeroTagline
             base="AI engineer building "
             lines={[
@@ -31,47 +47,64 @@ export default function HomePage() {
             ]}
           />
         </p>
-        <p className="fade-in-up mt-3 max-w-lg text-[14px] leading-relaxed text-fg-subtle md:text-[15px]">
+
+        {/* Summary */}
+        <p className="fade-in-up mt-3 max-w-lg text-[13px] leading-relaxed text-fg-subtle md:text-[14px]">
           {siteConfig.summary}
         </p>
-        <div className="fade-in-up mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 font-mono-ui text-sm">
+
+        {/* CTAs */}
+        <div className="fade-in-up mt-7 flex flex-wrap items-center gap-3">
           <Link
             href="/projects"
-            className="text-accent-fg transition-colors duration-200 hover:underline"
+            className="font-mono-ui text-[12px] rounded-md px-4 py-2 text-canvas bg-accent-fg transition-all duration-200 hover:shadow-[0_0_20px_var(--accent-glow)] hover:-translate-y-px"
           >
-            View work
+            View work →
           </Link>
           <a
             href={siteConfig.github.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-fg-subtle transition-colors duration-200 hover:text-fg"
+            className="font-mono-ui text-[12px] rounded-md px-4 py-2 border border-border-strong text-fg-subtle transition-colors duration-200 hover:text-fg hover:border-fg-subtle"
           >
             GitHub
           </a>
           <Link
             href="/contact"
-            className="text-fg-subtle transition-colors duration-200 hover:text-fg"
+            className="font-mono-ui text-[12px] rounded-md px-4 py-2 border border-border-strong text-fg-subtle transition-colors duration-200 hover:text-fg hover:border-fg-subtle"
           >
             Contact
           </Link>
         </div>
-        <p className="fade-in-up mt-5 font-mono-ui text-[11px] text-fg-subtle">
+
+        {/* Availability */}
+        <p className="fade-in-up mt-5 font-mono-ui text-[11px] text-fg-subtle flex items-center gap-2">
+          <span
+            className="h-1.5 w-1.5 rounded-full"
+            style={{
+              background: "var(--green)",
+              boxShadow: "0 0 8px var(--green)",
+              animation: "accent-pulse 2s ease-in-out infinite",
+            }}
+            aria-hidden="true"
+          />
           {siteConfig.availability}
         </p>
       </section>
 
-      <section className="mt-12 md:mt-14" aria-labelledby="systems-heading">
-        <div className="flex items-baseline justify-between gap-4 border-b border-border pb-3">
+      {/* ── SELECTED SYSTEMS ── */}
+      <section className="mt-14 md:mt-16" aria-labelledby="systems-heading">
+        <div className="flex items-center gap-3 border-b border-border pb-3 mb-6">
+          <span className="section-accent-bar" aria-hidden="true" />
           <h2
             id="systems-heading"
-            className="font-mono-ui text-[11px] tracking-[0.12em] text-fg-subtle"
+            className="font-mono-ui text-[10px] tracking-[0.14em] uppercase text-fg-subtle"
           >
-            SELECTED SYSTEMS
+            selected systems
           </h2>
         </div>
 
-        <div className="mt-5 grid gap-4 md:mt-6 md:grid-cols-2 md:gap-5">
+        <div className="grid gap-4 md:grid-cols-2 md:gap-5">
           {featured.map((project, i) => {
             const index = String(i + 1).padStart(2, "0");
 
@@ -85,7 +118,7 @@ export default function HomePage() {
                     averqenHeroImage
                       ? {
                           src: averqenHeroImage,
-                          alt: "Averqen incident investigation interface",
+                          alt: "Averqen security dashboard",
                         }
                       : undefined
                   }
@@ -141,13 +174,14 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── CURRENTLY ── */}
       <section
         className="mt-12 border-t border-border pt-8 md:mt-14"
         aria-labelledby="currently-heading"
       >
         <h2
           id="currently-heading"
-          className="font-mono-ui text-[11px] tracking-[0.12em] text-fg-subtle"
+          className="font-mono-ui text-[10px] tracking-[0.14em] uppercase text-fg-subtle"
         >
           currently
         </h2>

@@ -29,20 +29,20 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-canvas/92 backdrop-blur-sm">
-      <div className="container-wide flex h-11 items-center justify-between gap-4 md:h-12">
+    <header className="sticky top-0 z-50 border-b border-border bg-canvas/88 backdrop-blur-md">
+      <div className="container-wide flex h-12 items-center justify-between gap-4">
+        {/* Brand with blinking cursor */}
         <Link
           href="/"
-          className="font-mono-ui text-sm text-fg transition-colors duration-200 hover:text-accent-fg"
+          className="brand-cursor font-mono-ui text-sm text-fg transition-colors duration-200 hover:text-accent-fg"
+          aria-label="Home"
         >
-          {siteConfig.brandPath}
+          ~/miran
         </Link>
 
         <div className="flex items-center gap-1 sm:gap-4">
-          <nav
-            className="hidden items-center gap-5 md:flex"
-            aria-label="Primary"
-          >
+          {/* Desktop nav */}
+          <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
             {navLinks.map((link) => {
               const active =
                 pathname === link.href || pathname.startsWith(`${link.href}/`);
@@ -51,38 +51,45 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   className={[
-                    "font-mono-ui text-[13px] transition-colors duration-200",
+                    "relative font-mono-ui text-[12px] tracking-[0.04em] transition-colors duration-200 pb-[2px]",
                     active ? "text-fg" : "text-fg-subtle hover:text-fg",
                   ].join(" ")}
                   aria-current={active ? "page" : undefined}
                 >
                   {link.label}
+                  {active && <span className="nav-active-line" />}
                 </Link>
               );
             })}
           </nav>
 
-          <a
-            href={siteConfig.github.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden font-mono-ui px-2 py-1 text-[13px] text-fg-subtle transition-colors duration-200 hover:text-fg sm:inline-flex"
-            aria-label="GitHub"
-          >
-            github
-          </a>
-          {siteConfig.linkedin.href ? (
+          {/* Social links — separated by border */}
+          <div className="hidden items-center gap-1 border-l border-border pl-4 ml-2 sm:flex">
             <a
-              href={siteConfig.linkedin.href}
+              href={siteConfig.github.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden font-mono-ui px-2 py-1 text-[13px] text-fg-subtle transition-colors duration-200 hover:text-fg sm:inline-flex"
-              aria-label="LinkedIn"
+              className="font-mono-ui px-2 py-1 text-[11px] text-fg-subtle rounded transition-colors duration-200 hover:text-fg hover:bg-surface"
+              aria-label="GitHub"
             >
-              linkedin
+              github
             </a>
-          ) : null}
+            {siteConfig.linkedin.href ? (
+              <a
+                href={siteConfig.linkedin.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono-ui px-2 py-1 text-[11px] text-fg-subtle rounded transition-colors duration-200 hover:text-fg hover:bg-surface"
+                aria-label="LinkedIn"
+              >
+                linkedin
+              </a>
+            ) : null}
+          </div>
+
           <ThemeToggle />
+
+          {/* Mobile menu button */}
           <button
             type="button"
             className="inline-flex items-center justify-center rounded p-2 text-fg-muted hover:text-fg md:hidden"
@@ -111,6 +118,7 @@ export function Header() {
         </div>
       </div>
 
+      {/* Mobile drawer */}
       {open ? (
         <div
           id={menuId}
@@ -131,7 +139,7 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   className={[
-                    "font-mono-ui rounded px-2 py-2.5 text-sm transition-colors",
+                    "font-mono-ui rounded px-2 py-2.5 text-sm tracking-[0.04em] transition-colors",
                     active ? "text-fg" : "text-fg-muted hover:text-fg",
                   ].join(" ")}
                   aria-current={active ? "page" : undefined}

@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Subtle animated background — particles drifting on a grid.
+ * Blue Pulse ambient background — two large glow orbs (blue + purple)
+ * layered behind a fixed canvas for particles.
  * Respects prefers-reduced-motion. Pauses when tab hidden.
- * Designed to be layered behind content via fixed positioning.
  */
 export function AmbientBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -33,30 +33,11 @@ export function AmbientBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const surface = canvas;
-    const graphics = ctx;
+    // Particle colors — blue accent family
+    const ACCENT = "#63b3ed";
+    const ACCENT_DIM = "#3b82f6";
+    const SUBTLE = "#2a2a2a";
 
-    // Theme-aware colors (read from CSS custom properties)
-    const getColors = () => {
-      const style = getComputedStyle(document.documentElement);
-      const fgSubtle = style.getPropertyValue("--color-fg-subtle").trim() || "#857a68";
-      const accent = style.getPropertyValue("--color-accent").trim() || "#c4b59a";
-      const border = style.getPropertyValue("--color-border").trim() || "#2a2620";
-      return { fgSubtle, accent, border };
-    };
-
-    let colors = getColors();
-
-    // Re-read colors on theme change
-    const themeObserver = new MutationObserver(() => {
-      colors = getColors();
-    });
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    // Particle system
     type Particle = {
       x: number;
       y: number;
@@ -64,93 +45,63 @@ export function AmbientBackground() {
       vy: number;
       radius: number;
       alpha: number;
-      color: "fgSubtle" | "accent";
+      color: string;
     };
 
     const particles: Particle[] = [];
-    const PARTICLE_COUNT = 35;
-    const GRID_SIZE = 52; // matches CSS background grid
+    const PARTICLE_COUNT = 30;
 
     function resize() {
       const dpr = window.devicePixelRatio || 1;
-      surface.width = surface.clientWidth * dpr;
-      surface.height = surface.clientHeight * dpr;
-      graphics.scale(dpr, dpr);
+      canvas!.width = canvas!.clientWidth * dpr;
+      canvas!.height = canvas!.clientHeight * dpr;
+      ctx!.scale(dpr, dpr);
     }
 
     function initParticles() {
       particles.length = 0;
-      const width = surface.clientWidth;
-      const height = surface.clientHeight;
+      const width = canvas!.clientWidth;
+      const height = canvas!.clientHeight;
       for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const r = Math.random();
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          radius: Math.random() * 1.5 + 0.5,
-          alpha: Math.random() * 0.3 + 0.05,
-          color: Math.random() < 0.85 ? "fgSubtle" : "accent",
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          radius: Math.random() * 1.2 + 0.4,
+          alpha: Math.random() * 0.25 + 0.04,
+          color: r < 0.6 ? ACCENT : r < 0.85 ? ACCENT_DIM : SUBTLE,
         });
       }
     }
 
-    function drawGrid() {
-      const width = surface.clientWidth;
-      const height = surface.clientHeight;
-      graphics.strokeStyle = colors.border;
-      graphics.lineWidth = 0.5;
-      graphics.globalAlpha = 0.15;
-
-      // Vertical lines
-      for (let x = 0; x <= width; x += GRID_SIZE) {
-        graphics.beginPath();
-        graphics.moveTo(x, 0);
-        graphics.lineTo(x, height);
-        graphics.stroke();
-      }
-      // Horizontal lines
-      for (let y = 0; y <= height; y += GRID_SIZE) {
-        graphics.beginPath();
-        graphics.moveTo(0, y);
-        graphics.lineTo(width, y);
-        graphics.stroke();
-      }
-      graphics.globalAlpha = 1;
-    }
-
     function updateParticles() {
-      const width = surface.clientWidth;
-      const height = surface.clientHeight;
-
+      const width = canvas!.clientWidth;
+      const height = canvas!.clientHeight;
       for (const p of particles) {
         p.x += p.vx;
         p.y += p.vy;
-
-        // Wrap around edges
         if (p.x < -10) p.x = width + 10;
         if (p.x > width + 10) p.x = -10;
         if (p.y < -10) p.y = height + 10;
         if (p.y > height + 10) p.y = -10;
-
-        // Occasional random direction nudge
         if (Math.random() < 0.002) {
-          p.vx = (Math.random() - 0.5) * 0.3;
-          p.vy = (Math.random() - 0.5) * 0.3;
+          p.vx = (Math.random() - 0.5) * 0.25;
+          p.vy = (Math.random() - 0.5) * 0.25;
         }
       }
     }
 
     function drawParticles() {
       for (const p of particles) {
-        const color = colors[p.color];
-        graphics.beginPath();
-        graphics.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        graphics.fillStyle = color;
-        graphics.globalAlpha = p.alpha;
-        graphics.fill();
+        ctx!.beginPath();
+        ctx!.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx!.fillStyle = p.color;
+        ctx!.globalAlpha = p.alpha;
+        ctx!.fill();
       }
-      graphics.globalAlpha = 1;
+      ctx!.globalAlpha = 1;
     }
 
     let rafId: number;
@@ -159,8 +110,7 @@ export function AmbientBackground() {
         rafId = requestAnimationFrame(loop);
         return;
       }
-      graphics.clearRect(0, 0, surface.clientWidth, surface.clientHeight);
-      drawGrid();
+      ctx!.clearRect(0, 0, canvas!.clientWidth, canvas!.clientHeight);
       updateParticles();
       drawParticles();
       rafId = requestAnimationFrame(loop);
@@ -171,7 +121,7 @@ export function AmbientBackground() {
     loop();
 
     const handleResize = () => {
-      graphics.setTransform(1, 0, 0, 1, 0, 0);
+      ctx!.setTransform(1, 0, 0, 1, 0, 0);
       resize();
       initParticles();
     };
@@ -180,18 +130,29 @@ export function AmbientBackground() {
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", handleResize);
-      themeObserver.disconnect();
     };
   }, [reducedMotion, visible]);
 
   if (reducedMotion) return null;
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 -z-10 pointer-events-none"
-      aria-hidden="true"
-      style={{ width: "100%", height: "100%" }}
-    />
+    <>
+      {/* Glow orbs */}
+      <div
+        className="glow-orb glow-orb-blue"
+        aria-hidden="true"
+      />
+      <div
+        className="glow-orb glow-orb-purple"
+        aria-hidden="true"
+      />
+      {/* Particle canvas */}
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 -z-10 pointer-events-none"
+        aria-hidden="true"
+        style={{ width: "100%", height: "100%" }}
+      />
+    </>
   );
 }

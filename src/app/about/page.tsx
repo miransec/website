@@ -14,8 +14,11 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="container-page py-14 md:py-20">
-      <p className="section-label">about</p>
-      <div className="mt-8 flex items-start gap-5">
+      <p className="eyebrow-line font-mono-ui text-[11px] tracking-[0.12em] uppercase text-accent-fg mb-6 flex items-center">
+        about
+      </p>
+
+      <div className="flex items-start gap-5">
         <ProfileAvatar size={64} className="shrink-0" />
         <div className="min-w-0">
           <h1 className="font-display text-3xl font-bold tracking-[-0.03em] text-fg md:text-4xl">
@@ -51,8 +54,13 @@ export default function AboutPage() {
       </div>
 
       <section className="mt-14">
-        <h2 className="section-label">skills</h2>
-        <dl className="mt-6 space-y-5">
+        <div className="flex items-center gap-3 border-b border-border pb-3 mb-6">
+          <span className="section-accent-bar" aria-hidden="true" />
+          <h2 className="font-mono-ui text-[10px] tracking-[0.14em] uppercase text-fg-subtle">
+            skills
+          </h2>
+        </div>
+        <dl className="space-y-5">
           {skillCategories.map((category) => (
             <div key={category.title}>
               <dt className="font-mono-ui text-xs text-fg-subtle">
@@ -66,7 +74,7 @@ export default function AboutPage() {
         </dl>
       </section>
 
-      <p className="mt-12 space-y-2 font-mono-ui text-xs text-fg-subtle">
+      <div className="mt-12 space-y-2 font-mono-ui text-xs">
         <a
           href={siteConfig.email.href}
           className="block text-accent-fg hover:underline"
@@ -77,7 +85,7 @@ export default function AboutPage() {
           href={siteConfig.github.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="block hover:text-fg"
+          className="block text-fg-subtle hover:text-fg"
         >
           GitHub →
         </a>
@@ -86,12 +94,12 @@ export default function AboutPage() {
             href={siteConfig.linkedin.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="block hover:text-fg"
+            className="block text-fg-subtle hover:text-fg"
           >
             LinkedIn →
           </a>
         ) : null}
-      </p>
+      </div>
     </div>
   );
 }

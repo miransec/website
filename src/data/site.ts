@@ -7,7 +7,7 @@ export const siteConfig = {
   url: "https://muhammadmiran.com",
   domain: "muhammadmiran.com",
   locale: "en_US",
-  brandPath: "miran/",
+  brandPath: "~/miran",
   tagline: "AI engineer building secure, intelligent systems.",
   summary:
     "I build AI systems where models work inside reliable backend, retrieval, authorization, and security boundaries.",

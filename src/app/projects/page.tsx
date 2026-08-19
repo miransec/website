@@ -15,19 +15,32 @@ export default function ProjectsPage() {
   const featured = getFeaturedProjects();
   const list = featured.length ? featured : projects;
   const atlasDashboard = atlascoreScreenshotSrc("dashboard.png");
-  const averqenDetail = averqenScreenshotSrc("incident-detail.png");
-  const averqenDashboard = averqenScreenshotSrc("dashboard.png");
-  const averqenHeroImage = averqenDetail ?? averqenDashboard;
+  const averqenHeroImage = averqenScreenshotSrc("dashboard.png");
 
   return (
     <div className="container-wide py-12 md:py-16">
-      <p className="font-mono-ui text-xs tracking-[0.08em] text-fg-subtle">
-        SELECTED SYSTEMS
-      </p>
-      <h1 className="mt-4 font-display text-3xl font-bold tracking-[-0.03em] text-fg md:text-4xl">
-        Work
-      </h1>
-      <div className="mt-8 grid gap-4 md:grid-cols-2 md:gap-5">
+      {/* Header */}
+      <div className="mb-10">
+        <p className="eyebrow-line font-mono-ui text-[11px] tracking-[0.12em] uppercase text-accent-fg mb-4 flex items-center">
+          portfolio
+        </p>
+        <h1 className="font-display text-3xl font-bold tracking-[-0.03em] text-fg md:text-4xl">
+          Work
+        </h1>
+        <p className="mt-3 max-w-xl text-[14px] leading-relaxed text-fg-subtle">
+          Three full-stack AI systems — detection, retrieval, and multilingual support — each with deterministic security boundaries and comprehensive test coverage.
+        </p>
+      </div>
+
+      {/* Section divider */}
+      <div className="flex items-center gap-3 border-b border-border pb-3 mb-6">
+        <span className="section-accent-bar" aria-hidden="true" />
+        <span className="font-mono-ui text-[10px] tracking-[0.14em] uppercase text-fg-subtle">
+          selected systems
+        </span>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 md:gap-5">
         {list.map((project, i) => {
           const index = String(i + 1).padStart(2, "0");
 
@@ -41,7 +54,7 @@ export default function ProjectsPage() {
                   averqenHeroImage
                     ? {
                         src: averqenHeroImage,
-                        alt: "Averqen incident investigation interface",
+                        alt: "Averqen security dashboard",
                       }
                     : undefined
                 }
