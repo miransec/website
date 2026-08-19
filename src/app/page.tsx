@@ -4,10 +4,14 @@ import { HeroTagline } from "@/components/HeroTagline";
 import { getFeaturedProjects } from "@/data/projects";
 import { siteConfig } from "@/data/site";
 import { atlascoreScreenshotSrc } from "@/lib/atlascore-screenshots";
+import { averqenScreenshotSrc } from "@/lib/averqen-screenshots";
 
 export default function HomePage() {
   const featured = getFeaturedProjects();
-  const atlasAskAi = atlascoreScreenshotSrc("ask-ai.png");
+  const atlasDashboard = atlascoreScreenshotSrc("dashboard.png");
+  const averqenDetail = averqenScreenshotSrc("incident-detail.png");
+  const averqenDashboard = averqenScreenshotSrc("dashboard.png");
+  const averqenHeroImage = averqenDetail ?? averqenDashboard;
 
   return (
     <div className="container-wide py-10 md:py-14">
@@ -70,6 +74,33 @@ export default function HomePage() {
         <div className="mt-5 grid gap-4 md:mt-6 md:grid-cols-2 md:gap-5">
           {featured.map((project, i) => {
             const index = String(i + 1).padStart(2, "0");
+
+            if (project.slug === "averqen") {
+              return (
+                <SystemCard
+                  key={project.slug}
+                  index={index}
+                  project={project}
+                  image={
+                    averqenHeroImage
+                      ? {
+                          src: averqenHeroImage,
+                          alt: "Averqen incident investigation interface",
+                        }
+                      : undefined
+                  }
+                  placeholderLabel="averqen / security investigation platform"
+                  panelItems={[
+                    "Deterministic detection + correlation",
+                    "Grounded AI investigation with citations",
+                    "Threat intelligence + MITRE ATT&CK",
+                    "Policy-controlled simulated response",
+                  ]}
+                  className="md:col-span-2"
+                />
+              );
+            }
+
             if (project.slug === "vaanidesk") {
               return (
                 <SystemCard
@@ -83,16 +114,17 @@ export default function HomePage() {
                 />
               );
             }
+
             return (
               <SystemCard
                 key={project.slug}
                 index={index}
                 project={project}
                 image={
-                  atlasAskAi
+                  atlasDashboard
                     ? {
-                        src: atlasAskAi,
-                        alt: "AtlasCore Ask AI interface with grounded answer and evidence",
+                        src: atlasDashboard,
+                        alt: "AtlasCore workspace dashboard with sidebar navigation",
                       }
                     : undefined
                 }

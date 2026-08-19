@@ -35,7 +35,10 @@ export default function AboutPage() {
         <p>{siteConfig.aboutBlurb}</p>
         <p>
           I&apos;m especially interested in the intersection of AI engineering
-          and cybersecurity.
+          and cybersecurity. My recent work on Averqen focuses on AI-assisted
+          security investigation: deterministic detection and authorization
+          boundaries around grounded model analysis, so AI can help explain
+          evidence without becoming the security boundary itself.
         </p>
         <p>
           I&apos;m currently looking for internship opportunities where I can

@@ -10,11 +10,13 @@ test.describe("portfolio smoke", () => {
       page.getByText("AI engineer building secure, intelligent systems."),
     ).toBeVisible();
     await expect(page.getByRole("heading", { name: "SELECTED SYSTEMS" })).toBeVisible();
+    await expect(page.getByText("Averqen").first()).toBeVisible();
     await expect(page.getByText("AtlasCore").first()).toBeVisible();
     await expect(page.getByText("VaaniDesk").first()).toBeVisible();
     await expect(
       page.getByRole("link", { name: /View engineering case study/i }).first(),
     ).toBeVisible();
+    await expect(page.getByText(/1,493 tests/).first()).toBeVisible();
     await expect(page.getByText(/717 backend tests/)).toBeVisible();
     await expect(page.getByText(/206 backend tests/)).toBeVisible();
     await expect(page.getByText("AI engineering × cybersecurity")).toBeVisible();
@@ -28,7 +30,7 @@ test.describe("portfolio smoke", () => {
     await page.goto("/");
     await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "work" }).click();
     await expect(page).toHaveURL(/\/projects$/);
-    await expect(page.getByRole("heading", { name: "Work" })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Work" })).toBeVisible();
 
     await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "about" }).click();
     await expect(page).toHaveURL(/\/about$/);
@@ -59,6 +61,13 @@ test.describe("portfolio smoke", () => {
   });
 
   test("case studies render verified project information", async ({ page }) => {
+    await page.goto("/projects/averqen");
+    await expect(page.getByRole("heading", { name: "Averqen" })).toBeVisible();
+    await expect(page.getByText(/1,493/).first()).toBeVisible();
+    await expect(page.getByText(/FORCE RLS/).first()).toBeVisible();
+    await expect(page.getByText(/MITRE ATT&CK/).first()).toBeVisible();
+    await expect(page.getByText(/simulation.only/i).first()).toBeVisible();
+
     await page.goto("/projects/vaanidesk");
     await expect(page.getByRole("heading", { name: "VaaniDesk" })).toBeVisible();
     await expect(page.getByText(/206 passed/).first()).toBeVisible();
@@ -95,7 +104,7 @@ test.describe("portfolio smoke", () => {
     await expect(
       page.locator(
         'a[href="https://www.linkedin.com/in/miransec/"]',
-      ),
+      ).first(),
     ).toBeVisible();
     await expect(page.getByText(/LinkedIn.*coming soon/i)).toHaveCount(0);
 

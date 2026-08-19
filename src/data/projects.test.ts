@@ -4,6 +4,7 @@ import path from "path";
 import {
   atlascoreMetrics,
   atlascoreNotShipped,
+  averqenMetrics,
   getFeaturedProjects,
   getProjectBySlug,
   projects,
@@ -23,10 +24,15 @@ import {
   atlascoreScreenshotFiles,
   atlascoreScreenshotSrc,
 } from "@/lib/atlascore-screenshots";
+import {
+  averqenScreenshotFiles,
+  averqenScreenshotSrc,
+} from "@/lib/averqen-screenshots";
 
 describe("project data integrity", () => {
-  it("features AtlasCore before VaaniDesk", () => {
+  it("features Averqen first, then AtlasCore, then VaaniDesk", () => {
     expect(getFeaturedProjects().map((p) => p.slug)).toEqual([
+      "averqen",
       "atlascore",
       "vaanidesk",
     ]);
@@ -47,10 +53,20 @@ describe("project data integrity", () => {
   });
 
   it("resolves projects by slug", () => {
+    expect(getProjectBySlug("averqen")?.title).toBe("Averqen");
+    expect(getProjectBySlug("averqen")?.status).toBe("engineering-complete");
     expect(getProjectBySlug("vaanidesk")?.title).toBe("VaaniDesk");
     expect(getProjectBySlug("atlascore")?.statusShort).toBe("UI v2");
     expect(getProjectBySlug("atlascore")?.status).toBe("engineering-complete");
     expect(getProjectBySlug("missing")).toBeUndefined();
+  });
+
+  it("keeps verified Averqen v1.0.0 metrics coherent", () => {
+    expect(averqenMetrics.version).toBe("v1.0.0");
+    expect(averqenMetrics.tests.passed).toBe(1493);
+    expect(averqenMetrics.tests.failed).toBe(0);
+    expect(averqenMetrics.forceRlsTables).toBe(27);
+    expect(averqenMetrics.openApiPaths).toBe(58);
   });
 
   it("keeps verified VaaniDesk metrics coherent", () => {
@@ -101,6 +117,13 @@ describe("project data integrity", () => {
     expect(vaanidesk?.links.demo?.href ?? null).toBeNull();
   });
 
+  it("links Averqen to public miransec repository", () => {
+    const averqen = getProjectBySlug("averqen");
+    expect(averqen?.links.github.href).toBe(
+      "https://github.com/miransec/averqen",
+    );
+  });
+
   it("ships real VaaniDesk portfolio screenshots", () => {
     const dir = path.join(process.cwd(), "public", "projects", "vaanidesk");
     for (const name of [
@@ -127,6 +150,24 @@ describe("project data integrity", () => {
       );
       if (existsSync(full)) {
         expect(src).toBe(`/projects/atlascore/${file}`);
+      } else {
+        expect(src).toBeNull();
+      }
+    }
+  });
+
+  it("resolves Averqen screenshot paths only when files exist", () => {
+    for (const file of averqenScreenshotFiles) {
+      const src = averqenScreenshotSrc(file);
+      const full = path.join(
+        process.cwd(),
+        "public",
+        "projects",
+        "averqen",
+        file,
+      );
+      if (existsSync(full)) {
+        expect(src).toBe(`/projects/averqen/${file}`);
       } else {
         expect(src).toBeNull();
       }

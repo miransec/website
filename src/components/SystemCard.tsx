@@ -11,6 +11,8 @@ type SystemCardProps = {
   /** Typography-only visual when no product screenshot exists */
   placeholderLabel?: string;
   panelItems?: string[];
+  /** Optional class for grid placement (e.g. md:col-span-2 for flagship) */
+  className?: string;
 };
 
 export function SystemCard({
@@ -20,6 +22,7 @@ export function SystemCard({
   metrics,
   placeholderLabel,
   panelItems,
+  className = "",
 }: SystemCardProps) {
   const href = project.links.caseStudy.href ?? `/projects/${project.slug}`;
   const proof = metrics ?? [project.proofLine];
@@ -28,7 +31,7 @@ export function SystemCard({
   return (
     <Link
       href={href}
-      className="group relative flex h-full flex-col overflow-hidden rounded-[2px] border border-border bg-surface transition-[border-color,background-color,box-shadow] duration-300 hover:border-border-strong hover:bg-surface-hover hover:shadow-[0_0_0_1px_var(--color-accent-muted),0_8px_32px_rgba(0,0,0,0.15)] md:hover:shadow-[0_0_0_1px_var(--color-accent-muted),0_12px_40px_rgba(0,0,0,0.2)]"
+      className={`group relative flex h-full flex-col overflow-hidden rounded-[2px] border border-border bg-surface transition-[border-color,background-color,box-shadow] duration-300 hover:border-border-strong hover:bg-surface-hover hover:shadow-[0_0_0_1px_var(--color-accent-muted),0_8px_32px_rgba(0,0,0,0.15)] md:hover:shadow-[0_0_0_1px_var(--color-accent-muted),0_12px_40px_rgba(0,0,0,0.2)] ${className}`}
     >
       <div className="flex flex-1 flex-col p-5 md:p-6">
         <div className="flex items-baseline justify-between gap-3">

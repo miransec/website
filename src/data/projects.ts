@@ -37,9 +37,72 @@ export type Project = {
   screenshotDir: string;
 };
 
-const FEATURED_ORDER = ["atlascore", "vaanidesk"] as const;
+const FEATURED_ORDER = ["averqen", "atlascore", "vaanidesk"] as const;
 
 export const projects: Project[] = [
+  {
+    slug: "averqen",
+    title: "Averqen",
+    subtitle:
+      "AI-assisted security investigation with deterministic security boundaries.",
+    shortDescription:
+      "Deterministic detection, incident correlation, grounded AI analysis, threat intelligence, and policy-controlled simulated response.",
+    description:
+      "I built Averqen to explore how AI can help investigate security incidents without becoming the authorization or execution boundary. Telemetry, detection, correlation, tenant isolation, policy decisions, and high-impact response controls remain deterministic; AI operates only on bounded evidence.",
+    status: "engineering-complete",
+    statusLabel: "v1.0.0 — Engineering complete",
+    statusShort: "v1.0.0",
+    focus: [
+      "Deterministic detection",
+      "Grounded AI",
+      "FORCE RLS",
+      "Controlled response",
+    ],
+    techLine: [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Redis",
+      "Next.js",
+    ],
+    proofLine:
+      "1,493 tests · 27 FORCE-RLS tables · 58 OpenAPI paths · AI trust boundary",
+    featured: true,
+    technologies: [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Redis",
+      "Next.js",
+      "TypeScript",
+      "SQLAlchemy",
+      "Alembic",
+      "OpenTelemetry",
+      "pytest",
+    ],
+    highlights: [
+      "1,493 automated tests passing with adversarial security coverage",
+      "27 tenant-sensitive tables protected with PostgreSQL FORCE RLS",
+      "Deterministic telemetry, detection, incident correlation, and entity graph",
+      "Grounded AI investigator with evidence citations, validation, abstention, and MITRE ATT&CK mapping",
+      "Threat-intelligence enrichment with explicit source provenance",
+      "Deterministic response policy with human approval for high-impact actions",
+      "Simulation-only response execution with TOCTOU-safe approval snapshots",
+      "MFA, scoped API keys, Redis rate limiting, SSRF defenses, and hash-chained audit records",
+    ],
+    links: {
+      caseStudy: {
+        label: "View Case Study",
+        href: "/projects/averqen",
+      },
+      github: {
+        label: "GitHub",
+        href: "https://github.com/miransec/averqen",
+        external: true,
+      },
+    },
+    screenshotDir: "/projects/averqen",
+  },
   {
     slug: "atlascore",
     title: "AtlasCore",
@@ -154,6 +217,43 @@ export function getFeaturedProjects(): Project[] {
     (p): p is Project => Boolean(p?.featured),
   );
 }
+
+export const averqenMetrics = {
+  version: "v1.0.0",
+  tests: { passed: 1493, failed: 0 },
+  forceRlsTables: 27,
+  openApiPaths: 58,
+} as const;
+
+export const averqenAreas = [
+  "security telemetry",
+  "deterministic detection",
+  "incident correlation",
+  "entity graph",
+  "threat intelligence",
+  "MITRE ATT&CK",
+  "grounded AI investigation",
+  "evidence validation",
+  "AI trust boundary",
+  "deterministic response policy",
+  "human approval",
+  "simulation-only execution",
+  "hash-chained audit records",
+  "FORCE RLS",
+  "MFA",
+  "scoped API keys",
+  "Redis rate limiting",
+  "SSRF defenses",
+  "adversarial verification",
+] as const;
+
+export const averqenLimitations = [
+  "Response execution is simulation-only; no real firewall, EDR, or IAM integrations are exercised.",
+  "The system is an engineering portfolio project and is not presented as production-proven at enterprise scale.",
+  "High-impact response actions remain behind deterministic policy and human approval.",
+  "Averqen does not claim SOC 2 or ISO 27001 certification.",
+  "The portfolio demo uses deterministic AI output so the investigation flow remains reproducible.",
+] as const;
 
 export const vaanideskMetrics = {
   version: "v1.0.1",

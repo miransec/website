@@ -154,3 +154,97 @@ export function AtlasCoreArchitecture() {
     </div>
   );
 }
+
+export function AverqenArchitecture() {
+  const layers = [
+    {
+      title: "Security telemetry",
+      items: [
+        "Ingestion",
+        "Normalization",
+        "Deterministic detection",
+        "Alerts",
+      ],
+    },
+    {
+      title: "Investigation foundation",
+      items: [
+        "Incident correlation",
+        "Entity graph",
+        "Timeline",
+        "Threat intelligence",
+      ],
+    },
+    {
+      title: "Grounded AI",
+      items: [
+        "Bounded evidence packet",
+        "Structured investigation",
+        "Citation validation",
+        "Evidence sufficiency",
+      ],
+    },
+    {
+      title: "Controlled response",
+      items: [
+        "Response proposal",
+        "Deterministic policy",
+        "Human approval",
+        "SimulationExecutor",
+      ],
+    },
+    {
+      title: "Security boundary",
+      items: [
+        "FORCE RLS",
+        "Restricted runtime DB role",
+        "MFA + scoped API keys",
+        "Audit hash chain",
+      ],
+    },
+  ];
+
+  return (
+    <div
+      className="rounded-lg border border-border bg-surface p-4 md:p-6"
+      role="img"
+      aria-label="Averqen architecture: security telemetry, investigation foundation, grounded AI, controlled response, and security boundary"
+    >
+      <p className="mb-4 text-xs uppercase tracking-wide text-fg-subtle">
+        Architecture overview — v1.0.0
+      </p>
+      <div className="grid gap-3">
+        {layers.map((layer, index) => (
+          <div key={layer.title}>
+            <div className="rounded-md border border-border bg-canvas/50 px-4 py-3">
+              <p className="text-sm font-medium text-fg">{layer.title}</p>
+              <ul className="mt-2 flex flex-wrap gap-2">
+                {layer.items.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded border border-border bg-surface px-2 py-1 text-xs text-fg-muted"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {index < layers.length - 1 ? (
+              <div
+                className="flex justify-center py-1 text-fg-subtle"
+                aria-hidden="true"
+              >
+                ↓
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-xs leading-relaxed text-fg-subtle">
+        AI investigates. Deterministic controls authorize. Humans approve.
+        The model is downstream of detection and correlation — it never queries
+        the database directly or executes response actions.
+      </p>
+    </div>
+  );
+}
